@@ -1,0 +1,2 @@
+module WtbsHelper
+end

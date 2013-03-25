@@ -1,0 +1,2 @@
+class WtbsController < ApplicationController
+end
