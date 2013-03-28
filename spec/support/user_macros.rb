@@ -5,4 +5,8 @@ module UserMacros
     fill_in "Password", with: "password"
   end
 
+  def current_test_user
+    $current_test_user
+  end
+
 end
