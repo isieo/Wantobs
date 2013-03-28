@@ -21,16 +21,12 @@ class WtsController < ApplicationController
     @wts.used = params[:wts][:used]
     @wts.warranty = params[:wts][:warranty]
     
-    #raise @wts.inspect
-    
     if @wts.save
       redirect_to wts_path(@wts.slug), notice: 'Your WTS is created'
     else
       render action: "new"
     end
 
-    #flash[:notice] = "Your WTS is created"
-    #redirect_to wts_index_path
   end
   
   def show
