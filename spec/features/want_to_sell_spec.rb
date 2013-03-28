@@ -24,6 +24,5 @@ feature "[Want to sell]" do
     current_path.should == "/wts/#{Wts.last.permalink}"
   end
 
+
 end
-
-
