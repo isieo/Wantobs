@@ -1,0 +1,2 @@
+module WtsHelper
+end

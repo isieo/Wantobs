@@ -1,6 +1,6 @@
 Wantobs::Application.routes.draw do
+  resources :wts
   resources :wtbs, :path => "wtb"
-
 
   devise_for :users
 

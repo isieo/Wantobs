@@ -37,6 +37,7 @@ end
 gem "devise"
 
 gem 'activerecord-postgres-hstore'
+gem 'zurb-foundation', '~> 4.0.0'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130325101247) do
+ActiveRecord::Schema.define(:version => 20130328060014) do
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -46,5 +46,21 @@ ActiveRecord::Schema.define(:version => 20130325101247) do
   end
 
   add_index "wtbs", ["properties"], :name => "wtb_properties"
+
+  create_table "wts", :force => true do |t|
+    t.string   "item"
+    t.string   "price"
+    t.string   "quantity"
+    t.string   "information"
+    t.string   "links"
+    t.string   "used"
+    t.string   "warranty"
+    t.string   "contactmethod"
+    t.string   "paymentmethod"
+    t.string   "pickup"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.string   "slug"
+  end
 
 end
