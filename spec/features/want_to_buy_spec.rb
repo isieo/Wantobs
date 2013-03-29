@@ -37,6 +37,24 @@ feature "[Want to buy]" do
     page.should have_content("Playstation controller")
   end
 
+  scenario "User must be signed in to create a new wtb" do
+    page.driver.submit :delete, destroy_user_session_path, {} #logout
+    visit "/wtb/new"
+    current_path.should_not == "/wtb/new"
+  end
+
+  scenario "User must be signed in to edit wtb" do
+    page.driver.submit :delete, destroy_user_session_path, {} #logout
+    visit "/wtb/new"
+    current_path.should_not == "/wtb/new"
+  end
+
+  scenario "User must own the wtb to edit it" do
+    w = create(:wtb, item: "Keyboard", links: "http://google.com http://wikipedia.com")
+    visit "/wtb/#{w.slug}/edit"
+    current_path.should_not == "/wtb/#{w.slug}/edit"
+  end
+
   scenario "Listing all requests" do
     create(:wtb, item: "10 Megapixel camera")
     visit "/wtb"
