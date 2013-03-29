@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   attr_accessible :login
 
   has_many :wtbs
+  has_many :wts
 
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup

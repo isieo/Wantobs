@@ -20,6 +20,7 @@ class WtsController < ApplicationController
     @wts.quantity = params[:wts][:quantity]
     @wts.used = params[:wts][:used]
     @wts.warranty = params[:wts][:warranty]
+    @wts.user_id = current_user.id
     
     if @wts.save
       redirect_to wts_path(@wts.slug), notice: 'Your WTS is created'

@@ -2,6 +2,7 @@ class Wtb < ActiveRecord::Base
   serialize :properties, ActiveRecord::Coders::Hstore
   attr_accessible :additional_info, :budget, :item, :links, :quantity, :slug
   belongs_to :user
+  before_save :save_slug
   make_permalink :item, :include_id => false
 
   %w[brand_new factory_warranty contact_method payment_method collection_method].each do |key|
@@ -17,4 +18,7 @@ class Wtb < ActiveRecord::Base
     end
   end
 
+  def save_slug
+    self.slug = self.permalink
+  end
 end

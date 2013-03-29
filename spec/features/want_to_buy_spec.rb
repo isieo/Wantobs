@@ -22,6 +22,14 @@ feature "[Want to buy]" do
     page.should have_content("Your WTB is created")
 
     current_path.should == "/wtb/#{Wtb.last.slug}"
+
+    page.should have_content("Playstation controller")
   end
 
+  scenario "Listing all requests" do
+    create(:wtb, item: "10 Megapixel camera")
+    visit "/wtb"
+    page.should have_content("10 Megapixel camera")
+
+  end
 end

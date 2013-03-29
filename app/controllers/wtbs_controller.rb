@@ -20,6 +20,7 @@ class WtbsController < ApplicationController
     @wtb.quantity = params[:wtb][:quantity]
     @wtb.used = params[:wtb][:used]
     @wtb.warranty = params[:wtb][:warranty]
+    @wtb.user_id = current_user.id
     
     if @wtb.save
       redirect_to wtb_path(@wtb.slug), notice: 'Your wtb is created'
