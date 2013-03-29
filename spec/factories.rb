@@ -8,6 +8,16 @@ FactoryGirl.define do
 
   factory :wtb do
     item "Foo"
+    budget "RM500 - RM600"
+    links "www.google.com www.wikipedia.com"
+    quantity "10+"
+    user
+  end
+
+  factory :wts do
+    item "Foo"
+    budget "RM500 - RM600"
+    links "www.google.com www.wikipedia.com"
     user
   end
 end
