@@ -9,7 +9,7 @@ class WtsController < ApplicationController
   end
   
   def create
-    @wts = Wts.new
+    @wts = current_user.wts.new
     @wts.item = params[:wts][:item]
     @wts.contactmethod = params[:wts][:contactmethod]
     @wts.information = params[:wts][:information]
@@ -20,7 +20,6 @@ class WtsController < ApplicationController
     @wts.quantity = params[:wts][:quantity]
     @wts.used = params[:wts][:used]
     @wts.warranty = params[:wts][:warranty]
-    @wts.user_id = current_user.id
     
     if @wts.save
       redirect_to wts_path(@wts.slug), notice: 'Your WTS is created'
@@ -31,8 +30,8 @@ class WtsController < ApplicationController
   end
   
   def show
-    @wts = Wts.where(slug: params[:id])
-    @wts = Wts.find(params[:id]) if @wts.nil?
+    @wts = Wts.where(slug: params[:id]).first
+    @wts = Wts.find(params[:id]).first if @wts.nil?
 
     respond_to do |format|
       format.html # show.html.erb

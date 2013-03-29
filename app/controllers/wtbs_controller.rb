@@ -9,7 +9,7 @@ class WtbsController < ApplicationController
   end
 
   def create
-    @wtb = Wtb.new
+    @wtb = current_user.wtbs.new
     @wtb.item = params[:wtb][:item]
     @wtb.contactmethod = params[:wtb][:contactmethod]
     @wtb.additional_info = params[:wtb][:additional_info]
@@ -20,7 +20,6 @@ class WtbsController < ApplicationController
     @wtb.quantity = params[:wtb][:quantity]
     @wtb.used = params[:wtb][:used]
     @wtb.warranty = params[:wtb][:warranty]
-    @wtb.user_id = current_user.id
     
     if @wtb.save
       redirect_to wtb_path(@wtb.slug), notice: 'Your wtb is created'
@@ -31,8 +30,8 @@ class WtbsController < ApplicationController
   end
   
   def show
-    @wtb = wtb.where(slug: params[:id])
-    @wtb = wtb.find(params[:id]) if @wtb.nil?
+    @wtb = Wtb.where(slug: params[:id]).first
+    @wtb = Wtb.find(params[:id]).first if @wtb.nil?
 
     respond_to do |format|
       format.html # show.html.erb

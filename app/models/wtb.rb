@@ -21,4 +21,13 @@ class Wtb < ActiveRecord::Base
   def save_slug
     self.slug = self.permalink
   end
+  
+  def self.search(search)
+    if search
+      find(:all, :conditions => ['item LIKE ?', "%#{search}%"])
+    else
+      find(:all)
+    end
+  end
+  
 end

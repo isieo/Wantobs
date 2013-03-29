@@ -39,7 +39,7 @@ feature "[Want to sell]" do
     create(:wts, item: "Logitech Keyboard")
     visit "/"
     select "WTS", from: "Search for"
-    fill_in "keyword", "Keyboard"
+    fill_in "keyword", with: "Keyboard"
     click_on "Search"
     page.should have_content("Results for: Keyboard")
     page.should have_content("Logitech")
