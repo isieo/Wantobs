@@ -38,13 +38,8 @@ feature "[Want to buy]" do
     current_path.should_not == "/wtb/new"
   end
 
-  scenario "User must be signed in to edit wtb" do
+  scenario "User must be signed in and own the wtb to edit it" do
     page.driver.submit :delete, destroy_user_session_path, {} #logout
-    visit "/wtb/new"
-    current_path.should_not == "/wtb/new"
-  end
-
-  scenario "User must own the wtb to edit it" do
     w = create(:wtb, item: "Keyboard", links: "http://google.com http://wikipedia.com")
     visit "/wtb/#{w.slug}/edit"
     current_path.should_not == "/wtb/#{w.slug}/edit"
