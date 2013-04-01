@@ -6,11 +6,6 @@ feature "[Want to buy]" do
   end
 
   scenario "Creating a new buy request" do
-    pending "Read The Following rails cast to do this correctly \n \
-             http://railscasts.com/episodes/346-wizard-forms-with-wicked \n \
-             http://railscasts.com/episodes/253-carrierwave-file-uploads \n \
-             http://railscasts.com/episodes/381-jquery-file-upload \n \
-             then remove this pending line from this test"
     visit "/wtb/new"
     fill_in "Item", with: "Playstation controller"
     fill_in "Budget", with: "RM 300.00"
@@ -43,13 +38,8 @@ feature "[Want to buy]" do
     current_path.should_not == "/wtb/new"
   end
 
-  scenario "User must be signed in to edit wtb" do
+  scenario "User must be signed in and own the wtb to edit it" do
     page.driver.submit :delete, destroy_user_session_path, {} #logout
-    visit "/wtb/new"
-    current_path.should_not == "/wtb/new"
-  end
-
-  scenario "User must own the wtb to edit it" do
     w = create(:wtb, item: "Keyboard", links: "http://google.com http://wikipedia.com")
     visit "/wtb/#{w.slug}/edit"
     current_path.should_not == "/wtb/#{w.slug}/edit"
