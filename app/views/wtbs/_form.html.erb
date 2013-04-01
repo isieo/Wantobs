@@ -1,0 +1,44 @@
+<%= form_for(@wtb) do |f| %>
+  <% if @wtb.errors.any? %>
+      <h2><%= pluralize(@wtb.errors.count, "error") %> prohibited this product from being saved:</h2>
+      <ul>
+        <% @wtb.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+  <% end %>
+
+  <%= f.label :item %>:
+  <%= f.text_field :item %><br />
+
+  <%= f.label :budget, "Price" %>:
+  <%= f.text_field :budget %><br />
+
+  <%= f.label :quantity, "Quantity Available"%>:
+  <%= f.text_field :quantity %><br />
+  
+  <%= f.label :additional_info %>:
+  <%= f.text_area :additional_info %><br />
+  
+  <%= f.label :links %>:
+  <%= f.text_field :links %><br />
+  
+  <%= f.label :used %>:
+  <%= f.check_box :used, {}, "yes", "no"  %><br />
+      
+
+  <%= f.label :warranty, "Seller's warranty" %>:
+  <%= f.check_box :warranty, {}, "yes", "no"  %><br />
+  
+  <%= f.label :contactmethod, "Contact Method" %>:
+  <%= f.select :contactmethod, [['Personal Message', 'Personal Message'], ['Email', "Email"]] %><br />
+  
+  <%= f.label :paymentmethod, "Payment Method" %>:
+  <%= f.select :paymentmethod, [['Cash on delivery', 'Cash on delivery'], ['Bank-in', "Bank-in"]] %><br />
+  
+  <%= f.label :pickup, "Prefered Collection Method" %>:
+  <%= f.select :pickup, [['Pick up', 'Pick up'], ['Delivery','delivery']]%><br />
+  
+  <%= f.submit "Create WTS" %>
+  
+<%end%>
