@@ -10,20 +10,11 @@ class WtbsController < ApplicationController
   end
 
   def create
-    @wtb = current_user.wtbs.new
-    @wtb.item = params[:wtb][:item]
-    @wtb.contactmethod = params[:wtb][:contactmethod]
-    @wtb.additional_info = params[:wtb][:additional_info]
-    @wtb.links = params[:wtb][:links]
-    @wtb.paymentmethod = params[:wtb][:paymentmethod]
-    @wtb.pickup = params[:wtb][:pickup]
-    @wtb.price = params[:wtb][:price]
-    @wtb.quantity = params[:wtb][:quantity]
-    @wtb.used = params[:wtb][:used]
-    @wtb.warranty = params[:wtb][:warranty]
+    @wtb = current_user.wtbs.new(params[:wtb])
     
     if @wtb.save
-      redirect_to wtb_path(@wtb.slug), notice: 'Your wtb is created'
+      #redirect_to wtb_path(@wtb.slug), notice: 'Your wtb is created'
+      redirect_to wtb_steps_path(:id => "images", :wtb_id => @wtb.id)
     else
       render action: "new"
     end
@@ -32,27 +23,17 @@ class WtbsController < ApplicationController
   
   def edit
     @wtb = Wtb.where(slug: params[:id]).first
-    @wtb = Wtb.find(params[:id]).first if @wtb.nil?
+    @wtb = Wtb.find(params[:id]) if @wtb.nil?
   end
   
   def update
     @wtb = Wtb.where(slug: params[:id]).first
-    @wtb = Wtb.find(params[:id]).first if @wtb.nil?
+    @wtb = Wtb.find(params[:id]) if @wtb.nil?
 
-    @wtb = current_user.wtbs.new
-    @wtb.item = params[:wtb][:item]
-    @wtb.contactmethod = params[:wtb][:contactmethod]
-    @wtb.additional_info = params[:wtb][:additional_info]
-    @wtb.links = params[:wtb][:links]
-    @wtb.paymentmethod = params[:wtb][:paymentmethod]
-    @wtb.pickup = params[:wtb][:pickup]
-    @wtb.price = params[:wtb][:price]
-    @wtb.quantity = params[:wtb][:quantity]
-    @wtb.used = params[:wtb][:used]
-    @wtb.warranty = params[:wtb][:warranty]
+    @wtb.update_attributes(params[:wtb])
     
     if @wtb.save
-      redirect_to wtb_path(@wtb.slug), notice: 'Your wtb is created'
+      redirect_to wtb_path(@wtb.slug), notice: 'Your WTB is created'
     else
       render action: "new"
     end
@@ -61,7 +42,7 @@ class WtbsController < ApplicationController
   
   def show
     @wtb = Wtb.where(slug: params[:id]).first
-    @wtb = Wtb.find(params[:id]).first if @wtb.nil?
+    @wtb = Wtb.find(params[:id]) if @wtb.nil?
 
     respond_to do |format|
       format.html # show.html.erb

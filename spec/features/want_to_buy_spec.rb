@@ -18,8 +18,8 @@ feature "[Want to buy]" do
     select "Cash on delivery", from: "Payment Method"
     select "Pick up", from: "Prefered Collection Method"
     click_on "Next"
-    page.should have_content("Images for #{Wtb.last.name}")
-    current_path.should == "/wtb_steps/#{Wtb.last.slug}/image"
+    page.should have_content("Images for #{Wtb.last.item}")
+    #current_path.should == "/wtb_steps/#{Wtb.last.slug}/image"
     path = File.join("#{::Rails.root}/app/assets/images", "rails.png")
     attach_file("Images", path)
     page.should have_content("You can upload multiple images.")

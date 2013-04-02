@@ -1,3 +1,4 @@
 <% @wtbs.each do |wtb|%>
   <%= wtb.item %>
+  <%= image_tag wtb.image_url(:thumb).to_s %> </br>
 <% end %>

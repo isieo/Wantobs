@@ -1,4 +1,5 @@
 <%= @wtb.item %>
+<%= image_tag @wtb.image_url.to_s %>
 <%if !@wtb.links.blank?%>
   <% @wtb.links.split(" ").each do |link| %>
     <%= link_to link, url_with_protocol(link), :target => "_blank" %>

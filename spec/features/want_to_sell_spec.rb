@@ -6,6 +6,7 @@ feature "[Want to sell]" do
   end
 
   scenario "Creating a new sell request" do
+    pending "finish wtb first"
     visit "/wts/new"
     fill_in "Item", with: "Playstation"
     fill_in "Price", with: "RM 400.00"
@@ -17,11 +18,6 @@ feature "[Want to sell]" do
     select "Personal Message", from: "Contact Method"
     select "Cash on delivery", from: "Payment Method"
     select "Pick up", from: "Prefered Collection Method"
-    pending "Read The Following rails cast to do this correctly \n \
-             http://railscasts.com/episodes/346-wizard-forms-with-wicked \n \
-             http://railscasts.com/episodes/253-carrierwave-file-uploads \n \
-             http://railscasts.com/episodes/381-jquery-file-upload \n \
-             then remove this pending line from this test"
     click_on "Next"
     page.should have_content("Images for #{Wts.last.name}")
     current_path.should == "/wts_steps/#{Wts.last.slug}/image"
