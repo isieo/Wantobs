@@ -19,7 +19,7 @@ feature "[Want to buy]" do
     select "Pick up", from: "Prefered Collection Method"
     click_on "Next"
     page.should have_content("Images for #{Wtb.last.item}")
-    #current_path.should == "/wtb_steps/#{Wtb.last.slug}/image"
+    current_path.should == "/wtb/#{Wtb.last.slug}/wtb_steps/image"
     path = File.join("#{::Rails.root}/app/assets/images", "rails.png")
     attach_file("Images", path)
     page.should have_content("You can upload multiple images.")
@@ -51,7 +51,7 @@ feature "[Want to buy]" do
     cw = Wtb.find w.id
     cw.item.should == "Logitech Keyboard"
     page.should have_content("Images for #{Wtb.last.item}")
-    #current_path.should == "/wtb_steps/#{Wtb.last.slug}/image"
+    current_path.should == "/wtb/#{Wtb.last.slug}/wtb_steps/image"
     path = File.join("#{::Rails.root}/app/assets/images", "rails.png")
     attach_file("Images", path)
     page.should have_content("You can upload multiple images.")
