@@ -32,6 +32,38 @@ feature "[Want to buy]" do
     page.should have_content("Playstation controller")
   end
 
+
+  scenario "Editing an existing buy request" do
+    w = create(:wtb, item: "Keyboard", user: current_test_user, links: "http://google.com http://wikipedia.com")
+    visit "/wtb/#{w.slug}/edit"
+    current_path.should_not == "/wtb/#{w.slug}/edit"
+    fill_in "Item", with: "Logitech Keyboard"
+    fill_in "Budget", with: "RM 300.00"
+    fill_in "Quantity", with: "5"
+    fill_in "Additional Info", with: "I need this as my old one broked"
+    fill_in "Links", with: "http://forum.lowyat.net/topic/xxx1x http://collect.my"
+    check "Brand new"
+    check "Factory warranty"
+    select "Personal Message", from: "Contact Method"
+    select "Cash on delivery", from: "Payment Method"
+    select "Pick up", from: "Prefered Collection Method"
+    click_on "Next"
+    cw = Wtb.find w.id
+    cw.item.should == "Logitech Keyboard"
+    page.should have_content("Images for #{Wtb.last.item}")
+    #current_path.should == "/wtb_steps/#{Wtb.last.slug}/image"
+    path = File.join("#{::Rails.root}/app/assets/images", "rails.png")
+    attach_file("Images", path)
+    page.should have_content("You can upload multiple images.")
+    click_on "Finish"
+
+    page.should have_content("Your WTB is Updated")
+
+    current_path.should == "/wtb/#{Wtb.last.slug}"
+
+    page.should have_content("Playstation controller")
+  end
+
   scenario "User must be signed in to create a new wtb" do
     page.driver.submit :delete, destroy_user_session_path, {} #logout
     visit "/wtb/new"
