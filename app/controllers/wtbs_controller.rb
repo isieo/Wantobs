@@ -14,7 +14,7 @@ class WtbsController < ApplicationController
     
     if @wtb.save
       #redirect_to wtb_path(@wtb.slug), notice: 'Your wtb is created'
-      redirect_to wtb_steps_path(:id => "images", :wtb_id => @wtb.id)
+      redirect_to wtb_wtb_steps_path(@wtb.slug, :id => "images")
     else
       render action: "new"
     end

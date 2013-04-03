@@ -4,7 +4,8 @@ You can upload multiple images.
 <%= form_for @wtb, :html => {:multipart => true}, url: wizard_path do |f| %>
   <%= f.hidden_field :wtb_id, :value => @wtb.id %>
   <%= f.label :image, "Images" %>
-  <%= f.file_field :image %> </br>
+  <%#= f.file_field :image %> 
+  <%= f.file_field :image, multiple: true, name: "wtb[image]" %> </br>
   <%= f.label :remote_image_url, "or image URL" %>
   <%= f.text_field :remote_image_url %></br>
   <%= f.submit "Finish" %>
