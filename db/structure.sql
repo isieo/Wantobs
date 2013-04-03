@@ -516,6 +516,39 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
+-- Name: wtb_images; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE wtb_images (
+    id integer NOT NULL,
+    name character varying(255),
+    image character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    wtb_id integer
+);
+
+
+--
+-- Name: wtb_images_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE wtb_images_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: wtb_images_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE wtb_images_id_seq OWNED BY wtb_images.id;
+
+
+--
 -- Name: wtbs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -530,8 +563,7 @@ CREATE TABLE wtbs (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     slug character varying(255),
-    user_id integer,
-    image character varying(255)
+    user_id integer
 );
 
 
@@ -608,6 +640,13 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY wtb_images ALTER COLUMN id SET DEFAULT nextval('wtb_images_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY wtbs ALTER COLUMN id SET DEFAULT nextval('wtbs_id_seq'::regclass);
 
 
@@ -624,6 +663,14 @@ ALTER TABLE ONLY wts ALTER COLUMN id SET DEFAULT nextval('wts_id_seq'::regclass)
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: wtb_images_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY wtb_images
+    ADD CONSTRAINT wtb_images_pkey PRIMARY KEY (id);
 
 
 --
@@ -697,3 +744,13 @@ INSERT INTO schema_migrations (version) VALUES ('20130328084008');
 INSERT INTO schema_migrations (version) VALUES ('20130329033614');
 
 INSERT INTO schema_migrations (version) VALUES ('20130401165032');
+
+INSERT INTO schema_migrations (version) VALUES ('20130403035120');
+
+INSERT INTO schema_migrations (version) VALUES ('20130403041408');
+
+INSERT INTO schema_migrations (version) VALUES ('20130403041710');
+
+INSERT INTO schema_migrations (version) VALUES ('20130403041803');
+
+INSERT INTO schema_migrations (version) VALUES ('20130403042426');

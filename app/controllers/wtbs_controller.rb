@@ -13,8 +13,8 @@ class WtbsController < ApplicationController
     @wtb = current_user.wtbs.new(params[:wtb])
     
     if @wtb.save
-      #redirect_to wtb_path(@wtb.slug), notice: 'Your wtb is created'
-      redirect_to wtb_wtb_steps_path(@wtb.slug, :id => "images")
+      #flash[:notice] = "Your WTB is created."
+      redirect_to wtb_wtb_steps_path(@wtb.slug, :id => "images"), notice: "Your WTB is created."
     else
       render action: "new"
     end
@@ -33,7 +33,7 @@ class WtbsController < ApplicationController
     @wtb.update_attributes(params[:wtb])
     
     if @wtb.save
-      redirect_to wtb_path(@wtb.slug), notice: 'Your WTB is created'
+      redirect_to wtb_wtb_steps_path(@wtb.slug, :id => "images")
     else
       render action: "new"
     end

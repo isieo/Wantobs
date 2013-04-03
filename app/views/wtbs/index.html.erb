@@ -1,4 +1,6 @@
 <% @wtbs.each do |wtb|%>
   <%= wtb.item %>
-  <%= image_tag wtb.image_url(:thumb).to_s %> </br>
+  <% if !wtb.wtb_images.blank?%>
+    <%= image_tag wtb.wtb_images.all.first.image_url(:thumb).to_s %>
+  <% end %> </br>
 <% end %>

@@ -6,7 +6,6 @@ feature "[Want to sell]" do
   end
 
   scenario "Creating a new sell request" do
-    pending "finish wtb first"
     visit "/wts/new"
     fill_in "Item", with: "Playstation"
     fill_in "Price", with: "RM 400.00"
@@ -41,4 +40,21 @@ feature "[Want to sell]" do
     page.should have_content("Logitech")
   end
 
+  scenario "User visits wts that it owns" do
+    w = create(:wts, item: "Keyboard", user: current_test_user, links: "http://google.com http://wikipedia.com")
+    visit "/wts/#{w.slug}"
+    page.should have_content("Keyboard")
+    page.should have_content("Edit")
+    page.should have_link("http://google.com", href: "http://google.com")
+    page.should have_link("http://wikipedia.com", href: "http://wikipedia.com")
+  end
+
+  scenario "User visits someone else's wts" do
+    w = create(:wts, item: "Mouse", links: "http://google.com http://wikipedia.com")
+    visit "/wts/#{w.slug}"
+    page.should have_content("Mouse")
+    page.should_not have_content("Edit")
+    page.should have_link("http://google.com", href: "http://google.com")
+    page.should have_link("http://wikipedia.com", href: "http://wikipedia.com")
+  end
 end

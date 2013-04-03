@@ -4,21 +4,25 @@ class WtbStepsController < ApplicationController
   steps :images
   
   def show
+    @wtb.wtb_images.build if @wtb.wtb_images.blank?
     render_wizard
   end
   
   def update
-    @wtb.image = params[:wtb][:image]
-    
-    if @wtb.save
-      redirect_to wtb_path(@wtb.slug), notice: 'Your WTB is created'
-    else
-      render action: "new"
-    end
+    @wtb.attributes = params[:wtb]
+    render_wizard @wtb
   end
   
   def init_wtb
     @wtb = Wtb.where(slug: params[:wtb_id]).first
     @wtb = Wtb.find(params[:wtb_id]) if @wtb.nil?
   end
+  
+  private
+  
+  def finish_wizard_path
+    flash[:notice] = "Images for your WTB is updated"
+    wtb_path(@wtb.slug)
+  end
+  
 end

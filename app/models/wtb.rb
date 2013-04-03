@@ -1,9 +1,10 @@
 class Wtb < ActiveRecord::Base
   serialize :properties, ActiveRecord::Coders::Hstore
-  attr_accessible :additional_info, :budget, :item, :links, :quantity, :slug, :image, :remote_image_url
+  attr_accessible :additional_info, :budget, :item, :links, :quantity, :slug, :wtb_images, :wtb_images_attributes
   belongs_to :user
+  has_many :wtb_images
+  accepts_nested_attributes_for :wtb_images
   before_save :save_slug
-  mount_uploader :image, WtbImageUploader
   make_permalink :item, :include_id => false
 
   %w[brand_new factory_warranty contact_method payment_method collection_method].each do |key|
