@@ -1,3 +1,6 @@
 <% @wts.each do |wts|%>
   <%= wts.item %>
+  <% if !wts.wts_images.blank?%>
+    <%= image_tag wts.wts_images.all.first.image_url(:thumb).to_s %>
+  <% end %> </br>
 <% end %>

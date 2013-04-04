@@ -1,10 +1,25 @@
 class Wts < ActiveRecord::Base
-  before_save :save_slug
-  attr_accessible :contactmethod, :information, :item, :links, :paymentmethod, :pickup, :price, :quantity, :used, :warranty, :slug
-  make_permalink :item, :include_id => false
-  validates :item, :presence => true
+  serialize :properties, ActiveRecord::Coders::Hstore
+  attr_accessible :additional_info, :budget, :item, :links, :quantity, :slug, :wts_images, :wts_images_attributes
   belongs_to :user
-   
+  has_many :wts_images
+  accepts_nested_attributes_for :wts_images
+  before_save :save_slug
+  make_permalink :item, :include_id => false
+
+  %w[brand_new factory_warranty contact_method payment_method collection_method].each do |key|
+    attr_accessible key
+    scope "has_#{key}", lambda { |value| where("properties @> hstore(?, ?)", key, value) }
+
+    define_method(key) do
+      properties && properties[key]
+    end
+
+    define_method("#{key}=") do |value|
+      self.properties = (properties || {}).merge(key => value)
+    end
+  end
+
   def save_slug
     self.slug = self.permalink
   end
@@ -16,5 +31,5 @@ class Wts < ActiveRecord::Base
       find(:all)
     end
   end
-
+  
 end

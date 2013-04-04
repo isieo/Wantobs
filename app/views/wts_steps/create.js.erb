@@ -1,0 +1,5 @@
+<% if @wts.new_record? %>
+  alert("Failed to upload painting: <%= j @wts.errors.full_messages.join(', ').html_safe %>");
+<% else %>
+  $("#wtbs").append("<%= j render(@wts) %>");
+<% end %>

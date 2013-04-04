@@ -18,14 +18,14 @@ feature "[Want to sell]" do
     select "Cash on delivery", from: "Payment Method"
     select "Pick up", from: "Prefered Collection Method"
     click_on "Next"
-    page.should have_content("Images for #{Wts.last.name}")
-    current_path.should == "/wts_steps/#{Wts.last.slug}/image"
+    page.should have_content("Images for #{Wts.last.item}")
+    current_path.should == "/wts/#{Wts.last.slug}/wts_steps/images"
     path = File.join("#{::Rails.root}/app/assets/images", "rails.png")
     attach_file("Images", path)
     page.should have_content("You can upload multiple images.")
     click_on "Finish"
 
-    page.should have_content("Your WTS is created")
+    page.should have_content("Images for your WTS is updated")
 
     current_path.should == "/wts/#{Wts.last.permalink}"
   end

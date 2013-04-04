@@ -1,7 +1,7 @@
 # encoding: utf-8
 
-class WtbImageUploader < CarrierWave::Uploader::Base
-  
+class WtsImageUploader < CarrierWave::Uploader::Base
+
   include CarrierWave::RMagick
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick

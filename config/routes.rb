@@ -1,5 +1,7 @@
 Wantobs::Application.routes.draw do
-  resources :wts
+  resources :wts do 
+    resources :wts_steps
+  end
   resources :wtbs, :path => "wtb" do
     resources :wtb_steps
   end

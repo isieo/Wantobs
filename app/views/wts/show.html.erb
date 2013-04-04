@@ -1,1 +1,12 @@
 <%= @wts.item %>
+<% @wts.wts_images.each do |img|%>
+  <%= image_tag img.image_url.to_s %></br>
+<% end %>
+<%if !@wts.links.blank?%>
+  <% @wts.links.split(" ").each do |link| %>
+    <%= link_to link, url_with_protocol(link), :target => "_blank" %>
+  <% end %>
+<% end %>
+<% if @wts.user == current_user%>
+  <%= link_to 'Edit', edit_wts_path(@wts) %>
+<% end %>

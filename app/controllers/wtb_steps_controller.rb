@@ -10,6 +10,7 @@ class WtbStepsController < ApplicationController
   
   def update
     @wtb.attributes = params[:wtb]
+    @wtb.save
     render_wizard @wtb
   end
   

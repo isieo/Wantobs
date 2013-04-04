@@ -593,20 +593,16 @@ ALTER SEQUENCE wtbs_id_seq OWNED BY wtbs.id;
 CREATE TABLE wts (
     id integer NOT NULL,
     item character varying(255),
-    price character varying(255),
     quantity character varying(255),
-    information character varying(255),
     links character varying(255),
     used character varying(255),
-    warranty character varying(255),
-    contactmethod character varying(255),
-    paymentmethod character varying(255),
-    pickup character varying(255),
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     slug character varying(255),
     user_id integer,
-    budget character varying(255)
+    budget character varying(255),
+    properties hstore,
+    additional_info character varying(255)
 );
 
 
@@ -627,6 +623,39 @@ CREATE SEQUENCE wts_id_seq
 --
 
 ALTER SEQUENCE wts_id_seq OWNED BY wts.id;
+
+
+--
+-- Name: wts_images; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE wts_images (
+    id integer NOT NULL,
+    name character varying(255),
+    image character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    wts_id integer
+);
+
+
+--
+-- Name: wts_images_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE wts_images_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: wts_images_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE wts_images_id_seq OWNED BY wts_images.id;
 
 
 --
@@ -658,6 +687,13 @@ ALTER TABLE ONLY wts ALTER COLUMN id SET DEFAULT nextval('wts_id_seq'::regclass)
 
 
 --
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY wts_images ALTER COLUMN id SET DEFAULT nextval('wts_images_id_seq'::regclass);
+
+
+--
 -- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -679,6 +715,14 @@ ALTER TABLE ONLY wtb_images
 
 ALTER TABLE ONLY wtbs
     ADD CONSTRAINT wtbs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: wts_images_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY wts_images
+    ADD CONSTRAINT wts_images_pkey PRIMARY KEY (id);
 
 
 --
@@ -754,3 +798,13 @@ INSERT INTO schema_migrations (version) VALUES ('20130403041710');
 INSERT INTO schema_migrations (version) VALUES ('20130403041803');
 
 INSERT INTO schema_migrations (version) VALUES ('20130403042426');
+
+INSERT INTO schema_migrations (version) VALUES ('20130404071816');
+
+INSERT INTO schema_migrations (version) VALUES ('20130404072016');
+
+INSERT INTO schema_migrations (version) VALUES ('20130404072055');
+
+INSERT INTO schema_migrations (version) VALUES ('20130404073704');
+
+INSERT INTO schema_migrations (version) VALUES ('20130404074415');
