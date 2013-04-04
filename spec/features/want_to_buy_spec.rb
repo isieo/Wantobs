@@ -18,7 +18,6 @@ feature "[Want to buy]" do
     select "Cash on delivery", from: "Payment Method"
     select "Pick up", from: "Prefered Collection Method"
     click_on "Next"
-    page.should have_content("Your WTB is created")
     page.should have_content("Images for #{Wtb.last.item}")
     current_path.should == "/wtb/#{Wtb.last.slug}/wtb_steps/images"
     path = File.join("#{::Rails.root}/app/assets/images", "rails.png")
