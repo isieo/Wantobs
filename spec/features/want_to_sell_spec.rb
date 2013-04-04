@@ -18,7 +18,6 @@ feature "[Want to sell]" do
     select "Cash on delivery", from: "Payment Method"
     select "Pick up", from: "Prefered Collection Method"
     click_on "Next"
-    page.should have_content("Images for #{Wts.last.name}")
     current_path.should == "/wts_steps/#{Wts.last.slug}/image"
     path = File.join("#{::Rails.root}/app/assets/images", "rails.png")
     attach_file("Images", path)

@@ -14,30 +14,30 @@
   <%= f.label :budget %>:
   <%= f.text_field :budget %><br />
 
-  <%= f.label :quantity, "Quantity Available"%>:
+  <%= f.label :quantity, "Quantity"%>:
   <%= f.text_field :quantity %><br />
-  
+
   <%= f.label :additional_info, "Additional Info" %>:
   <%= f.text_area :additional_info %><br />
-  
+
   <%= f.label :links %>:
   <%= f.text_field :links %><br />
 
   <%= f.label :brand_new %>:
   <%= f.check_box :brand_new, {}, "yes", "no"  %><br />
-      
+
   <%= f.label :factory_warranty, "Factory warranty" %>:
   <%= f.check_box :factory_warranty, {}, "yes", "no"  %><br />
-  
+
   <%= f.label :contact_method, "Contact Method" %>:
   <%= f.select :contact_method, [['Personal Message', 'Personal Message'], ['Email', "Email"]] %><br />
-  
+
   <%= f.label :payment_method, "Payment Method" %>:
   <%= f.select :payment_method, [['Cash on delivery', 'Cash on delivery'], ['Bank-in', "Bank-in"]] %><br />
-  
+
   <%= f.label :collection_method, "Prefered Collection Method" %>:
   <%= f.select :collection_method, [['Pick up', 'Pick up'], ['Delivery','delivery']]%><br />
-  
+
   <%= f.submit "Next" %>
-  
+
 <%end%>

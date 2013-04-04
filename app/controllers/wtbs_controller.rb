@@ -4,34 +4,33 @@ class WtbsController < ApplicationController
   def index
     @wtbs = Wtb.all
   end
-  
+
   def new
     @wtb = Wtb.new
   end
 
   def create
     @wtb = current_user.wtbs.new(params[:wtb])
-    
+
     if @wtb.save
-      flash[:notice] = "Your WTB is created."
-      redirect_to wtb_wtb_steps_path(@wtb.slug, :id => "images")#, notice: "Your WTB is created."
+      redirect_to wtb_wtb_steps_path(@wtb.slug), notice: "Your WTB is created."
     else
       render action: "new"
     end
 
   end
-  
+
   def edit
     @wtb = Wtb.where(slug: params[:id]).first
     @wtb = Wtb.find(params[:id]) if @wtb.nil?
   end
-  
+
   def update
     @wtb = Wtb.where(slug: params[:id]).first
     @wtb = Wtb.find(params[:id]) if @wtb.nil?
 
     @wtb.update_attributes(params[:wtb])
-    
+
     if @wtb.save
       redirect_to wtb_wtb_steps_path(@wtb.slug, :id => "images")
     else
@@ -39,7 +38,7 @@ class WtbsController < ApplicationController
     end
 
   end
-  
+
   def show
     @wtb = Wtb.where(slug: params[:id]).first
     @wtb = Wtb.find(params[:id]) if @wtb.nil?

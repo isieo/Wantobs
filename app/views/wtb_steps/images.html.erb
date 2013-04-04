@@ -1,14 +1,10 @@
-<% if flash[:notice] %>
-    <%= flash[:notice] %>
-<% end %>
-
 Images for <%=@wtb.item%></br>
 
 You can upload multiple images.
 <%= form_for @wtb, :html => {:multipart => true}, url: wizard_path do |f| %>
 
   <%=f.fields_for :wtb_images do |builder|%>
-    <%= builder.label :image, "Images" %> 
+    <%= builder.label :image, "Images" %>
     <%= builder.file_field :image, multiple: true, name: "wtb[wtb_images_attributes][0][image]" %> </br>
   <% end %>
 
@@ -23,5 +19,3 @@ You can upload multiple images.
   <div class="progress"><div class="bar" style="width: 0%;"></div></div>
 </div>
 </script>
-
-
