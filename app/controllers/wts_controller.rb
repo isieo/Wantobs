@@ -23,6 +23,7 @@ class WtsController < ApplicationController
   def edit
     @wts = Wts.where(slug: params[:id]).first
     @wts = Wts.find(params[:id]) if @wts.nil?
+
   end
   
   def update
@@ -42,7 +43,6 @@ class WtsController < ApplicationController
   def show
     @wts = Wts.where(slug: params[:id]).first
     @wts = Wts.find(params[:id]) if @wts.nil?
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @wts }

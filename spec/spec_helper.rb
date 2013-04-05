@@ -51,6 +51,7 @@ Spork.prefork do
     config.before(:each) do
       User.delete_all
       Wtb.delete_all
+      Wts.delete_all
       $current_test_user = create(:user, :username => "test_user",
               :email => "test_user@email.com",
               :password => "password",

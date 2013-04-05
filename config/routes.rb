@@ -1,4 +1,7 @@
 Wantobs::Application.routes.draw do
+  resources :comments
+
+
   resources :wts do 
     resources :wts_steps
   end

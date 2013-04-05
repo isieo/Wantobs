@@ -4,9 +4,10 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :authentication_keys => [:login]
-
+  
   # Setup accessible (or protected) attributes for your model
   attr_accessible :username, :email, :password, :password_confirmation, :remember_me
+  validates :email, :presence => true
   # attr_accessible :title, :body
 
   # Virtual attribute for authenticating by either username or email
@@ -17,6 +18,7 @@ class User < ActiveRecord::Base
 
   has_many :wtbs
   has_many :wts
+  has_many :comments
 
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup

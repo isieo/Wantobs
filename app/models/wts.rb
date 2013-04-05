@@ -3,10 +3,11 @@ class Wts < ActiveRecord::Base
   attr_accessible :additional_info, :budget, :item, :links, :quantity, :slug, :wts_images, :wts_images_attributes
   belongs_to :user
   has_many :wts_images
+  has_many :comments
   accepts_nested_attributes_for :wts_images
   before_save :save_slug
   make_permalink :item, :include_id => false
-
+  validates :item, :presence => true
   %w[brand_new factory_warranty contact_method payment_method collection_method].each do |key|
     attr_accessible key
     scope "has_#{key}", lambda { |value| where("properties @> hstore(?, ?)", key, value) }
