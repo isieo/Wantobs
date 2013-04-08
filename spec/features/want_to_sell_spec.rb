@@ -45,6 +45,7 @@ feature "[Want to sell]" do
     visit "/wts/#{w.slug}"
     page.should have_content("Keyboard")
     page.should have_content("Edit")
+    page.should_not have_content("Contact Seller")
     page.should have_link("http://google.com", href: "http://google.com")
     page.should have_link("http://wikipedia.com", href: "http://wikipedia.com")
   end
@@ -53,6 +54,7 @@ feature "[Want to sell]" do
     w = create(:wts, item: "Mouse", links: "http://google.com http://wikipedia.com")
     visit "/wts/#{w.slug}"
     page.should have_content("Mouse")
+    page.should have_content("Contact Seller")
     page.should_not have_content("Edit")
     page.should have_link("http://google.com", href: "http://google.com")
     page.should have_link("http://wikipedia.com", href: "http://wikipedia.com")
