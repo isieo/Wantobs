@@ -12,6 +12,7 @@ class CommentsController < ApplicationController
     
     if @comment.save
       flash[:notice] = "Comment successfully created"
+      redirect_to :back
     else
       flash[:notice] = "There is an error posting your comment, please try again later"
     end
