@@ -1,8 +1,12 @@
-<% if !@search.nil? %>
-  Results for: <%= params[:search]%> </br>
-  <% @search.each do |wts|%>
-    <%= wts.item %>
-  <% end %>
-<% end %>
+<div class="small-3 columns">
 
+<form class="custom">
+  <select id="customDropdown" class='small'>
+    <option DISABLED>This is a dropdown</option>
+    <option>This is another option</option>
+    <option>This is another option too</option>
+    <option>Look, a third option</option>
+  </select>
+</form>
 
+</div>

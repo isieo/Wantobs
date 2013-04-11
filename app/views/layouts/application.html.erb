@@ -46,13 +46,13 @@
           <li class="divider"></li>
           <!-- Search form-->
           <li class="has-form">
-            <%= form_tag root_path, :method => 'get' do %>
+            <%= form_tag search_path, :method => 'get', :class =>"custom" do %>
               <div class="row collapse">
                 <div class="small-6 columns">
                   <%= text_field_tag :search, params[:search] %>
                 </div>
                 <div class="small-2 columns">
-                  <%= select_tag :search_for, "<option>WTS</option><option>WTB</option>".html_safe%>
+                  <%= select_tag :search_for, "<option>WTS</option><option>WTB</option>".html_safe, :id => 'customDropdown', :class => 'small'%>
                 </div>
                 <div class="small-4 columns">
                   <%= submit_tag "Search", :name => nil, :class => "button" %>

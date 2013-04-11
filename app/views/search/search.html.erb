@@ -1,0 +1,6 @@
+<% if !@search.nil? %>
+  Results for: <%= params[:search]%> </br>
+  <% @search.each do |wts|%>
+    <%= wts.item %>
+  <% end %>
+<% end %>
