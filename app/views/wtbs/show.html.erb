@@ -4,12 +4,12 @@
 
 <div class="row">
   <div class="large-8 columns">
-    <h2>Want To Buy</h2>
+    <h3 style="color: #1111FF">[Want To Buy]</h3>
     <h1><%= @wtb.item %></h1>
-    <table>
+    <table class="large-12 columns borderless_table">
+      <col width="180px" />
       <tr><th>Budget</th><td><%= @wtb.budget %></td></tr>
       <tr><th>Quantity</th><td><%= @wtb.quantity %></td></tr>
-      <tr><th>More Info</th><td><%= @wtb.additional_info %></td></tr>
 
       <tr>
         <th>Links</th>
@@ -25,10 +25,11 @@
       <tr><th>Payment Method</th><td><%= @wtb.payment_method %></td></tr>
       <tr><th>Delivery Method</th><td><%= @wtb.contact_method %></td></tr>
     </table>
+    <p><%= @wtb.additional_info %></p>
   </div>
   <div class="large-4 columns">
     <% if @wtb.user == current_user%>
-      <p><span class="alert label"><%= link_to 'Edit', edit_wtb_path(@wtb) %></span></p>
+      <p><%= link_to 'Edit', edit_wtb_path(@wtb), class: 'button alert small' %></p>
     <% else %>
       <p><span class="success label">Contact Buyer</span></p>
     <% end %>
@@ -79,13 +80,13 @@
               <% end %>
             </ul>
         <% end %>
-        <%= f.hidden_field :user_id %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
         <%= f.hidden_field :wtb_id %>
         <%= f.text_area :comment, :size => "20x20"%>
         <div align='right'>
           <%= f.submit "Post", :class => "small button success radius" %>
         </div>
-      <% end %>
+      <% end if user_signed_in? %>
     </div>
 
   </div>

@@ -4,13 +4,13 @@
 
 <div class="row">
   <div class="large-8 columns">
-    <h2>Want To Sell</h2>
+    <h3 style="color: #FF1111">[Want To Sell]</h3>
     <h1><%= @wts.item %></h1>
-    <table>
+    <table class="large-12 columns borderless_table">
+      <col width="180px" />
       <tr><th>Budget</th><td><%= @wts.budget %></td></tr>
       <tr><th>Quantity Available</th><td><%= @wts.quantity %></td></tr>
-      <tr><th>More Info</th><td><%= @wts.additional_info %></td></tr>
-
+      
       <tr>
         <th>Links</th>
         <td>
@@ -25,10 +25,11 @@
       <tr><th>Payment Method</th><td><%= @wts.payment_method %></td></tr>
       <tr><th>Delivery Method</th><td><%= @wts.contact_method %></td></tr>
     </table>
+    <p><%= @wts.additional_info %></p>
   </div>
   <div class="large-4 columns">
     <% if @wts.user == current_user%>
-      <p><span class="alert label"><%= link_to 'Edit', edit_wts_path(@wts) %></span></p>
+      <p><%= link_to 'Edit', edit_wts_path(@wts), class: 'button alert small' %></p>
     <% else %>
       <p><span class="success label">Contact Seller</span></p>
     <% end %>
@@ -79,13 +80,13 @@
               <% end %>
             </ul>
         <% end %>
-        <%= f.hidden_field :user_id %>
+        <%= f.hidden_field :user_id, value: current_user.id  %>
         <%= f.hidden_field :wts_id %>
         <%= f.text_area :comment, :size => "20x20"%>
         <div align='right'>
           <%= f.submit "Post", :class => "small button success radius" %>
         </div>
-      <% end %>
+      <% end if user_signed_in? %>
     </div>
 
   </div>

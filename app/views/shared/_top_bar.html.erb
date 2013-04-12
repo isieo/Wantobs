@@ -1,0 +1,55 @@
+<div class="contain-to-grid sticky">
+  <nav class="top-bar">
+    <ul class="title-area">
+      <!-- Title Area -->
+      <li class="name">
+        <h1><%= link_to "Wantobs", root_path%></h1>
+      </li>
+      <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
+
+    <section class="top-bar-section">
+      <!-- Left Nav Section -->
+      <ul class="left">
+        <li class="divider"></li>
+        <li class="active"><a href="#">Main Item 1</a></li>
+        <li class="divider"></li>
+      </ul>
+
+      <!-- Right Nav Section -->
+      <ul class="right">
+        <li class="divider hide-for-small"></li>
+        <!-- Search form-->
+        <li class="has-form">
+          <%= form_tag search_path, :method => 'get', :class =>"custom" do %>
+            <div class="row collapse">
+              <div class="small-2 columns">
+                <%#= select_tag :search_for, options_for_select(["WTS", "WTB"])%>
+                <%= radio_button_tag(:search_for, "WTS") %>
+                <%= label_tag(:search_for, "WTS") %>
+                <%= radio_button_tag(:search_for, "WTB") %>
+                <%= label_tag(:search_for, "WTB") %>
+              </div>
+              <div class="small-6 columns">
+                <%= text_field_tag :search, params[:search] %>
+              </div>
+              <div class="small-4 columns">
+                <%= submit_tag "Search", :name => nil, :class => "button" %>
+              </div>
+            </div>
+          <% end %>
+        </li>
+        <li class="divider show-for-small"></li>
+        <!-- Login and logout button-->
+        <li class="has-form">
+          <%if !user_signed_in?%>
+            <%= link_to "Sign in", user_session_path, :class => "button"%> 
+          <% else %>
+            <%= link_to "Logout", destroy_user_session_path, :method => 'delete', :class => "button alert"%>
+          <% end %>
+        </li>
+      </ul>
+    </section>
+  </nav>
+</div>

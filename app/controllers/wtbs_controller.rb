@@ -43,7 +43,7 @@ class WtbsController < ApplicationController
     @wtb = Wtb.where(slug: params[:id]).first
     @wtb = Wtb.find(params[:id]) if @wtb.nil?
     @comments = @wtb.comments
-    @comment = Comment.new(user_id: current_user.id, wtb_id: @wtb.id)
+    @comment = Comment.new(wtb_id: @wtb.id)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @wtb }

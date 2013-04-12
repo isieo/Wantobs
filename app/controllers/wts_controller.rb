@@ -43,7 +43,7 @@ class WtsController < ApplicationController
     @wts = Wts.where(slug: params[:id]).first
     @wts = Wts.find(params[:id]) if @wts.nil?
     @comments = @wts.comments
-    @comment = Comment.new(user_id: current_user.id, wts_id: @wts.id)
+    @comment = Comment.new(wts_id: @wts.id)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @wts }
