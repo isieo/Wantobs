@@ -1,6 +1,38 @@
 <% if !@search.nil? %>
-  Results for: <%= params[:search]%> </br>
-  <% @search.each do |wts|%>
-    <%= wts.item %>
-  <% end %>
+  <p>Results for: <strong style="color: red;"><%= params[:search]%></strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Thumbnail</th>
+        <th width="300">Item</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @search.each do |result|%>
+        <tr>
+          <th rowspan="2">
+            <%if result.class.to_s == "Wtb"%>
+              <% if !result.wtb_images.blank?%>
+                <%= link_to image_tag(result.wtb_images.all.first.image_url(:thumb).to_s, :size => '150x150'), wtb_path(result), :class => "th" %>
+              <% end %>
+            <% else %>
+              <% if !result.wts_images.blank?%>
+                <%= link_to image_tag(result.wts_images.all.first.image_url(:thumb).to_s, :size => '150x150'), wts_path(result), :class => "th" %>
+              <% end %>
+            <% end %>
+          </th>
+          <td>
+            <%if result.class.to_s == "Wtb"%>
+              <%= link_to ("["+result.class.to_s.upcase+"]"+result.item), wtb_path(result)%> 
+            <% else %>
+              <%= link_to ("["+result.class.to_s.upcase+"]"+result.item), wts_path(result)%> 
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td class = 'subheader'><%= result.additional_info.truncate(20) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% end %>
