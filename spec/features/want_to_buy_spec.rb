@@ -106,7 +106,7 @@ feature "[Want to buy]" do
   scenario "Search for Wtb from home page" do
     create(:wtb, item: "Logitech Keyboard", user: current_test_user, links: "http://google.com http://wikipedia.com")
     visit "/"
-    select "WTB", from: "search_for"
+    #select "WTB", from: "search_for"
     fill_in "search", with: "Keyboard"
     click_on "Search"
     page.should have_content("Results for: Keyboard")

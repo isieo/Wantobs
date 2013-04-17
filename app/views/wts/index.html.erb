@@ -1,6 +1,28 @@
-<% @wts.each do |wts|%>
-  <%= wts.item %>
-  <% if !wts.wts_images.blank?%>
-    <%= image_tag wts.wts_images.all.first.image_url(:thumb).to_s %>
-  <% end %> </br>
-<% end %>
+<p><strong style="color: red;">WTS </strong>list</p>
+<table>
+  <thead>
+    <tr>
+      <th>Thumbnail</th>
+      <th width="300">Item</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @wts.each do |result|%>
+      <tr>
+        <th rowspan="2">
+          <% if !result.wts_images.blank?%>
+            <%= link_to image_tag(result.wts_images.all.first.image_url(:list_size).to_s), wts_path(result), :class => "th" %>
+          <% end %>
+        </th>
+        <td>
+          <%= link_to wts_path(result) do%> 
+            <strong class="result-wts">[WTS]</strong> <%=result.item%>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td class = 'subheader'><%= result.additional_info.truncate(20) if !result.additional_info.nil? %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

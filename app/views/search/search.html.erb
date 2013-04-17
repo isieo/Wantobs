@@ -1,3 +1,16 @@
+<%= form_tag search_path, :method => 'get', :class =>"custom" do %>
+  <div class="row collapse">
+    <div class="small-8 columns">
+      <%= text_field_tag :adv_search, params[:adv_search] %>
+    </div>
+    <div class="small-2 columns ">
+      <%= select_tag :search_for, options_for_select(["WTS", "WTB"])%>   
+    </div>
+    <div class="small-2 columns">
+      <%= submit_tag "Search", :name => nil, :class => "button postfix" %>
+    </div>
+  </div>
+<% end %>
 <% if !@search.nil? %>
   <p>Results for: <strong style="color: red;"><%= params[:search]%></strong></p>
   <table>
@@ -13,24 +26,22 @@
           <th rowspan="2">
             <%if result.class.to_s == "Wtb"%>
               <% if !result.wtb_images.blank?%>
-                <%= link_to image_tag(result.wtb_images.all.first.image_url(:thumb).to_s, :size => '150x150'), wtb_path(result), :class => "th" %>
+                <%= link_to image_tag(result.wtb_images.all.first.image_url(:list_size).to_s), wtb_path(result), :class => "th" %>
               <% end %>
             <% else %>
               <% if !result.wts_images.blank?%>
-                <%= link_to image_tag(result.wts_images.all.first.image_url(:thumb).to_s, :size => '150x150'), wts_path(result), :class => "th" %>
+                <%= link_to image_tag(result.wts_images.all.first.image_url(:list_size).to_s), wts_path(result), :class => "th" %>
               <% end %>
             <% end %>
           </th>
           <td>
-            <%if result.class.to_s == "Wtb"%>
-              <%= link_to ("["+result.class.to_s.upcase+"]"+result.item), wtb_path(result)%> 
-            <% else %>
-              <%= link_to ("["+result.class.to_s.upcase+"]"+result.item), wts_path(result)%> 
+            <%= link_to result.class.to_s == "Wtb" ? wtb_path(result) : wts_path(result) do%> 
+              <strong class="result-<%= result.class.to_s.downcase %>">[<%= result.class.to_s.upcase %>]</strong> <%=result.item%>
             <% end %>
           </td>
         </tr>
         <tr>
-          <td class = 'subheader'><%= result.additional_info.truncate(20) %></td>
+          <td class = 'subheader'><%= result.additional_info.truncate(20) if !result.additional_info.nil? %></td>
         </tr>
       <% end %>
     </tbody>

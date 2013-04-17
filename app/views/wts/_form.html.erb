@@ -1,43 +1,111 @@
-<%= form_for(@wts) do |f| %>
-  <% if @wts.errors.any? %>
-      <h2><%= pluralize(@wts.errors.count, "error") %> prohibited this product from being saved:</h2>
-      <ul>
-        <% @wts.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-  <% end %>
+<%= form_for(@wts, html:{class: 'custom'}) do |f| %>
+  <div class="row">
+    <div class="large-6 columns">
+      <div class="row ">
+        <div class="large-9 small-9 columns">
+          <% if @wts.errors.any? %>
+              <h2><%= pluralize(@wts.errors.count, "error") %> prohibited this product from being saved:</h2>
+              <ul>
+                <% @wts.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+              </ul>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <%= f.label :item %>:
-  <%= f.text_field :item %><br />
-
-  <%= f.label :budget, "Price" %>:
-  <%= f.text_field :budget %><br />
-
-  <%= f.label :quantity, "Quantity Available"%>:
-  <%= f.text_field :quantity %><br />
-  
-  <%= f.label :additional_info, "Additional Info" %>:
-  <%= f.text_area :additional_info %><br />
-  
-  <%= f.label :links %>:
-  <%= f.text_field :links %><br />
-
-  <%= f.label :brand_new, "Used" %>:
-  <%= f.check_box :brand_new, {}, "no", "yes"  %><br />
+  <div class="row">
+    <div class="large-6 columns">
+    
+      <div class="row ">
+        <div class="large-3 small-3 columns">
+          <%= f.label :item, class: "right inline" %>
+        </div>
+        <div class="large-9 small-9 columns">
+          <%= f.text_field :item %>
+        </div>
+      </div>
       
-  <%= f.label :factory_warranty, "Seller's warranty" %>:
-  <%= f.check_box :factory_warranty, {}, "yes", "no"  %><br />
-  
-  <%= f.label :contact_method, "Contact Method" %>:
-  <%= f.select :contact_method, [['Personal Message', 'Personal Message'], ['Email', "Email"]] %><br />
-  
-  <%= f.label :payment_method, "Payment Method" %>:
-  <%= f.select :payment_method, [['Cash on delivery', 'Cash on delivery'], ['Bank-in', "Bank-in"]] %><br />
-  
-  <%= f.label :collection_method, "Prefered Collection Method" %>:
-  <%= f.select :collection_method, [['Pick up', 'Pick up'], ['Delivery','delivery']]%><br />
-  
-  <%= f.submit "Next" %>
-  
+      <div class="row ">
+        <div class="large-3 small-3 columns">
+          <%= f.label :budget, "Price", class: "right inline" %>
+        </div>
+        <div class="large-9 small-9 columns">
+          <%= f.text_field :budget %>
+        </div>
+      </div>
+      
+      <div class="row ">
+        <div class="large-3 small-3 columns">
+          <%= f.label :quantity, "Quantity Available", class: "right inline" %>
+        </div>
+        <div class="large-9 small-9 columns">
+          <%= f.text_field :quantity %>
+        </div>
+      </div>
+      
+      <div class="row ">
+        <div class="large-3 small-3 columns">
+          <%= f.label :additional_info, "Additional Info", class: "right inline" %>
+        </div>
+        <div class="large-9 small-9 columns">
+          <%= f.text_area :additional_info, :cols => 20, :rows => 40%>
+        </div>
+      </div>
+      
+      <div class="row ">
+        <div class="large-3 small-3 columns">
+          <%= f.label :links, class: "right inline" %>
+        </div>
+        <div class="large-9 small-9 columns">
+          <%= f.text_field :links %>
+        </div>
+      </div>
+      
+      <div class="row ">
+        <div class="large-3 small-3 columns">
+          <label class="right inline">Options</label>
+        </div>
+        <div class="large-9 small-9 columns panel">
+          <%= f.label :brand_new do %>
+            <%= f.check_box :brand_new, {}, "no", "yes" %>Used
+          <% end %>
+          <%= f.label :factory_warranty, "Factory warranty" do %>
+            <%= f.check_box :factory_warranty, {}, "yes", "no"  %>Seller's warranty
+          <% end %>
+        </div>
+      </div>
+      
+      <div class="row ">
+        <div class="large-3 small-3 columns">
+          <%= f.label :contact_method, "Contact Method", class: "right inline" %>
+        </div>
+        <div class="large-9 small-9 columns">
+          <%= f.select :contact_method, [['Personal Message', 'Personal Message'], ['Email', "Email"]] %>
+        </div>
+      </div>
+      
+      <div class="row ">
+        <div class="large-3 small-3 columns">
+          <%= f.label :payment_method, "Payment Method", class: "right inline" %>
+        </div>
+        <div class="large-9 small-9 columns">
+          <%= f.select :payment_method, [['Cash on delivery', 'Cash on delivery'], ['Bank-in', "Bank-in"]] %>
+        </div>
+      </div>
+      
+      <div class="row ">
+        <div class="large-3 small-3 columns">
+          <%= f.label :collection_method, "Prefered Collection Method", class: "right inline" %>
+        </div>
+        <div class="large-9 small-9 columns">
+          <%= f.select :collection_method, [['Pick up', 'Pick up'], ['Delivery','delivery']]%>
+        </div>
+      </div>
+      
+      <%= f.submit "Next", class: "button small" %>
+    </div>
+  </div>
 <%end%>

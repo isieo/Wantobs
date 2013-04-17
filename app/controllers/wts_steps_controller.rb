@@ -9,7 +9,7 @@ class WtsStepsController < ApplicationController
   end
   
   def update
-    @wts.attributes = params[:wts]
+    @wts.update_attributes(params[:wts])
     @wts.save
     render_wizard @wts
   end

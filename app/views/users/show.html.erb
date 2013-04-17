@@ -1,0 +1,67 @@
+<p>List of WTB and WTS for <b><%= @user.username%></b></p>
+<div class="row">
+  <div class="large-6 columns">
+    <div class="panel">
+      <h3><strong class='result-wts'>WTS</strong></h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Thumbnail</th>
+            <th width="300">Item</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @user.wts.each do |result|%>
+            <tr>
+              <th rowspan="2">
+                <% if !result.wts_images.blank?%>
+                  <%= link_to image_tag(result.wts_images.all.first.image_url(:list_size).to_s), wts_path(result), :class => "th" %>
+                <% end %>
+              </th>
+              <td>
+                <%= link_to wts_path(result) do%> 
+                  <strong class="result-wts">[WTS]</strong> <%=result.item%>
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <td class = 'subheader'><%= result.additional_info.truncate(20) if !result.additional_info.nil? %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="large-6 columns">
+    <div class="panel">
+      <h3><strong class='result-wtb'>WTB</strong></h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Thumbnail</th>
+            <th width="300">Item</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @user.wtbs.each do |result|%>
+            <tr>
+              <th rowspan="2">
+                <% if !result.wtb_images.blank?%>
+                  <%= link_to image_tag(result.wtb_images.all.first.image_url(:list_size).to_s), wtb_path(result), :class => "th" %>
+                <% end %>
+              </th>
+              <td>
+                <%= link_to wtb_path(result) do%> 
+                  <strong class="result-wtb">[WTB]</strong> <%=result.item%>
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <td class = 'subheader'><%= result.additional_info.truncate(20) if !result.additional_info.nil? %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
