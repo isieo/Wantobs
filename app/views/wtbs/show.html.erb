@@ -4,8 +4,8 @@
 
 <div class="row">
   <div class="large-8 columns">
-    <h3 style="color: #1111FF">[Want To Buy]</h3>
-    <h1><%= @wtb.item %></h1>
+    <h3 class='title'>[Want To Buy]</h3>
+    <h2 class='title'><%= @wtb.item %></h2>
     <table class="large-12 columns borderless_table">
       <col width="180px" />
       <tr><th>Budget</th><td><%= @wtb.budget %></td></tr>
@@ -31,7 +31,7 @@
     <% if @wtb.user == current_user%>
       <p><%= link_to 'Edit', edit_wtb_path(@wtb), class: 'button alert small' %></p>
     <% else %>
-      <p><span class="success label">Contact Buyer</span></p>
+      <p><%= link_to 'Contact Buyer', user_path(@wtb.user), class: 'button small' %></p>
     <% end %>
     <div class = 'panel'>
       <h5>Item should be</h5>
@@ -59,15 +59,19 @@
 </div>
 
 <div class="row">
-  <div class="large-8 columns">
+  <div class="large-6 columns">
     <h6>Comments</h6>
     <dl>
       <% @comments.each do |comment| %>
-        <dt>
-          <%= comment.user.username %> <span class="label">
-          <%= 'WTB Poster' if comment.user = @wtb.user %></span>
-        </dt>
-        <dd><%= comment.comment %></dd>
+        <div class="panel">
+          <dt class='poster-info'>
+            <%= link_to comment.user.username, user_path(comment.user) %> on 
+            <%= comment.created_at.to_formatted_s(:long) %> at 
+            <%=comment.created_at.strftime("%H:%M")%> said:
+            <%= '<span class="label">WTB Poster</span>'.html_safe if comment.user == @wtb.user %>
+          </dt>
+          <dd><%= comment.comment %></dd>
+        </div>
       <% end %>
     </dl>
     <div class="large-6 columns">

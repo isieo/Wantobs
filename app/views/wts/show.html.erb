@@ -4,8 +4,8 @@
 
 <div class="row">
   <div class="large-8 columns">
-    <h3 style="color: #FF1111">[Want To Sell]</h3>
-    <h1><%= @wts.item %></h1>
+    <h3 class='title'>[Want To Sell]</h3>
+    <h2 class='title'><%= @wts.item %></h2>
     <table class="large-12 columns borderless_table">
       <col width="180px" />
       <tr><th>Budget</th><td><%= @wts.budget %></td></tr>
@@ -31,7 +31,7 @@
     <% if @wts.user == current_user%>
       <p><%= link_to 'Edit', edit_wts_path(@wts), class: 'button alert small' %></p>
     <% else %>
-      <p><span class="success label">Contact Seller</span></p>
+      <p><%= link_to 'Contact Seller', user_path(@wts.user), class: 'button small' %></p>
     <% end %>
     <div class = 'panel'>
       <h5>Item Are</h5>
@@ -63,11 +63,15 @@
     <h6>Comments</h6>
     <dl>
       <% @comments.each do |comment| %>
-        <dt>
-          <%= comment.user.username %> <span class="label">
-          <%= 'WTS Poster' if comment.user = @wts.user %></span>
-        </dt>
-        <dd><%= comment.comment %></dd>
+        <div class="panel">
+          <dt class='poster-info'>
+            <%= link_to comment.user.username, user_path(comment.user) %> on 
+            <%= comment.created_at.to_formatted_s(:long) %> at 
+            <%=comment.created_at.strftime("%H:%M")%> said:
+            <%= '<span class="label">WTS Poster</span>'.html_safe if comment.user == @wts.user %>
+          </dt>
+          <dd><%= comment.comment %></dd>
+        </div>
       <% end %>
     </dl>
     <div class="large-6 columns">
@@ -80,7 +84,7 @@
               <% end %>
             </ul>
         <% end %>
-        <%= f.hidden_field :user_id, value: current_user.id  %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
         <%= f.hidden_field :wts_id %>
         <%= f.text_area :comment, :size => "20x20"%>
         <div align='right'>

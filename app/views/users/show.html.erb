@@ -1,4 +1,22 @@
-<p>List of WTB and WTS for <b><%= @user.username%></b></p>
+<div class="row panel">
+  <div class="large-2 columns">
+    <%= image_tag @user.image_url(:thumb).to_s, :class => "th" %>
+  </div>
+  <div class="large-10 columns">
+    <table class="large-12 columns borderless_table">
+      <col width="180px" />
+      <tr><th>Username</th><td><%= @user.username.capitalize %></td></tr>
+      <tr><th>WTS Count</th><td><%= @user.wts.count %></td></tr>
+      <tr><th>WTB Count</th><td><%= @user.wtbs.count %></td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-6 columns">
+    <p>List of WTB and WTS for <b><%= @user.username.capitalize%></b></p>
+  </div>
+</div>
 <div class="row">
   <div class="large-6 columns">
     <div class="panel">

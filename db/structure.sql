@@ -526,7 +526,8 @@ CREATE TABLE users (
     last_sign_in_ip character varying(255),
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    username character varying(255)
+    username character varying(255),
+    image character varying(255)
 );
 
 
@@ -859,3 +860,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130404073704');
 INSERT INTO schema_migrations (version) VALUES ('20130404074415');
 
 INSERT INTO schema_migrations (version) VALUES ('20130405082111');
+
+INSERT INTO schema_migrations (version) VALUES ('20130419080850');

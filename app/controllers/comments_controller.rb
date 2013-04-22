@@ -11,6 +11,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(params[:comment])
     
     if @comment.save
+      UserMailer.comment_notification(@comment).deliver
       flash[:notice] = "Comment successfully created"
       redirect_to :back
     else
