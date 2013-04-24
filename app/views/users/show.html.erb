@@ -28,7 +28,7 @@
           <h3><strong class='result-wts'>WTS</strong></h3>
         </div>
         <div class="small-9 columns">
-          <%= link_to "New WTS", new_wts_path, class: "button small"%>
+          <%= link_to "New WTS", new_wts_path, class: "button small" if @user == current_user%>
         </div>
       </div>
       <table>
@@ -69,7 +69,7 @@
           <h3><strong class='result-wtb'>WTB</strong></h3>
         </div>
         <div class="small-9 columns">
-          <%= link_to "New WTB", new_wtb_path, class: "button small"%>
+          <%= link_to "New WTB", new_wtb_path, class: "button small" if @user == current_user%>
         </div>
       </div>
       <table>
