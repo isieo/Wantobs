@@ -18,7 +18,8 @@ class User < ActiveRecord::Base
 
   has_many :wtbs
   has_many :wts
-  has_many :comments
+  has_many :comments, as: :commentable
+  has_many :commented, class_name: "Comment"
 
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup

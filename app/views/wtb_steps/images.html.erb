@@ -1,21 +1,37 @@
-Images for <%=@wtb.item%></br>
-
-You can upload multiple images.
-<%= form_for @wtb, :html => {:multipart => true}, url: wizard_path do |f| %>
-
-  <%=f.fields_for :wtb_images do |builder|%>
-    <%= builder.label :image, "Images" %>
-    <%= builder.file_field :image, multiple: true, name: "wtb[wtb_images_attributes][0][image]" %> </br>
-  <% end %>
-
-  <%= f.submit "Finish" %>
-  or <%= link_to "skip this step", root_path %>
+<%= form_for @wtb, :html => {:multipart => true, html:{class: 'custom'}}, url: wizard_path do |f| %>
+  <fieldset>
+    <div class="row">
+      <div class="large-6 columns">
+        <h3>Images for <%=@wtb.item%></h3>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="large-6 columns">
+        <div class="row ">
+          <div class="large-9 small-9 columns">
+            <% if @wtb.errors.any? %>
+                <h2><%= pluralize(@wtb.errors.count, "error") %> prohibited this product from being saved:</h2>
+                <ul>
+                  <% @wtb.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                  <% end %>
+                </ul>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <%=f.fields_for :wtb_images do |builder|%>
+      <%= render 'wtb_image_fields', f: builder %>
+    <% end %>
+    <%= link_to_add_fields "Add Image", f, :wtb_images %>
+    
+    <div class="row ">
+      <div class="large-4 small-4 large-offset-4 columns">
+        <%= f.submit "Finish", class: "button small"%> or <%= link_to "skip this step", root_path %>
+      </div>
+    </div>
+  </fieldset>
 <% end %>
-
-
-
-<script id="template-upload" type="text/x-tmpl"><div class="upload">
-  {%=o.name%}
-  <div class="progress"><div class="bar" style="width: 0%;"></div></div>
-</div>
-</script>

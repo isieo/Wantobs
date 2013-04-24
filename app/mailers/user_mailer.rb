@@ -7,11 +7,10 @@ class UserMailer < ActionMailer::Base
   #   en.user_mailer.comment_notification.subject
   #
   def comment_notification(comment)
-    
-    @user = comment.wts.user if !comment.wts.nil?
-    @user = comment.wtb.user if !comment.wtb.nil?
+    @user = comment.commentable if comment.commentable.class.to_s == "User"
+    @user = comment.commentable.user if comment.commentable.class.to_s == "Wtb"
+    @user = comment.commentable.user if comment.commentable.class.to_s == "Wts"
     @comment = comment
-
     mail to: @user.email, subject: "Someone commented on your post"
   end
 end

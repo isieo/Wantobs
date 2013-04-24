@@ -1,4 +1,4 @@
-<p><strong style="color: red;">WTB </strong>list</p>
+<p><strong class="result-wtb">WTB </strong>list</p>
 <table>
   <thead>
     <tr>
@@ -12,6 +12,8 @@
         <th rowspan="2">
           <% if !result.wtb_images.blank?%>
             <%= link_to image_tag(result.wtb_images.all.first.image_url(:list_size).to_s), wtb_path(result), :class => "th" %>
+          <% else %>
+            <%= link_to image_tag("not_available.jpg", size: '60x60'), wtb_path(result), :class => "th" %>
           <% end %>
         </th>
         <td>

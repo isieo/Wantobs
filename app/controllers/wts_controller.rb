@@ -42,11 +42,18 @@ class WtsController < ApplicationController
   def show
     @wts = Wts.where(slug: params[:id]).first
     @wts = Wts.find(params[:id]) if @wts.nil?
-    @comments = @wts.comments
-    @comment = Comment.new(wts_id: @wts.id)
+    @commentable = @wts
+    @comments = @commentable.comments
+    @comment = Comment.new
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @wts }
     end
+  end
+  
+  def destroy
+    @wts = Wts.find(params[:id])
+    @wts.destroy
+    redirect_to user_path(@wts.user), notice: "Your WTS is deleted."
   end
 end

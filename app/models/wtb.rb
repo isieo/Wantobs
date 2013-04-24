@@ -3,8 +3,8 @@ class Wtb < ActiveRecord::Base
   attr_accessible :additional_info, :budget, :item, :links, :quantity, :slug, :wtb_images, :wtb_images_attributes
   belongs_to :user
   has_many :wtb_images
-  has_many :comments
-  accepts_nested_attributes_for :wtb_images
+  has_many :comments, as: :commentable
+  accepts_nested_attributes_for :wtb_images, allow_destroy: true
   before_save :save_slug
   make_permalink :item, :include_id => false
   validates :item, :presence => true

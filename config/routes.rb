@@ -1,19 +1,25 @@
 Wantobs::Application.routes.draw do
   get 'search' => 'search#search', :as => :search
-  resources :comments
+  
 
 
   resources :wts do 
     resources :wts_steps
+    resources :comments
   end
   resources :wtbs, :path => "wtb" do
     resources :wtb_steps
+    resources :comments
   end
 
   
 
-  devise_for :users
-  resources :users, :only => [:show]
+  devise_for :users do
+    resources :comments
+  end
+  resources :users, :only => [:show] do 
+    resources :comments
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

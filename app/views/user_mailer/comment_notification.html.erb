@@ -1,3 +1,3 @@
 <%= @user.username %>, someone commented on your post
-<%= link_to @comment.wts.item, wts_path(@comment.wts) if !@comment.wts.nil?%>
-<%= link_to @comment.wtb.item, wts_path(@comment.wtb) if !@comment.wtb.nil?%>
+<%= link_to @comment.commentable.item, wts_path(@comment.commentable) if !@comment.commentable.class.to_s == 'Wts'%>
+<%= link_to @comment.commentable.item, wtb_path(@comment.commentable) if !@comment.commentable.class.to_s == 'Wtb'%>

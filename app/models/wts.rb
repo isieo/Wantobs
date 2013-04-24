@@ -3,7 +3,7 @@ class Wts < ActiveRecord::Base
   attr_accessible :additional_info, :budget, :item, :links, :quantity, :slug, :wts_images, :wts_images_attributes
   belongs_to :user
   has_many :wts_images
-  has_many :comments
+  has_many :comments, as: :commentable
   accepts_nested_attributes_for :wts_images
   before_save :save_slug
   make_permalink :item, :include_id => false

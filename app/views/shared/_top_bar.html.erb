@@ -13,7 +13,11 @@
       <!-- Left Nav Section -->
       <ul class="left">
         <li class="divider"></li>
-        <li class="active"><a href="#">Main Item 1</a></li>
+        <li class="active"><%= link_to "Browse WTB", wtbs_path %></li>
+        <li class="divider"></li>
+        <li class="active"><%= link_to "Browse WTS", wts_index_path %></li>
+        <li class="divider"></li>
+        <li class="active"><%= link_to "My Account", user_path(current_user) if !current_user.nil?%></li>
         <li class="divider"></li>
       </ul>
 

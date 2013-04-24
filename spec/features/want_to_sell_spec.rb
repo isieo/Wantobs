@@ -22,7 +22,7 @@ feature "[Want to sell]" do
     current_path.should == "/wts/#{Wts.last.slug}/wts_steps/images"
     path = File.join("#{::Rails.root}/app/assets/images", "rails.png")
     attach_file("Images", path)
-    page.should have_content("You can upload multiple images.")
+    #page.should have_content("You can upload multiple images.")
     click_on "Finish"
 
     page.should have_content("Images for your WTS is updated")

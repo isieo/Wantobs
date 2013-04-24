@@ -42,11 +42,18 @@ class WtbsController < ApplicationController
   def show
     @wtb = Wtb.where(slug: params[:id]).first
     @wtb = Wtb.find(params[:id]) if @wtb.nil?
-    @comments = @wtb.comments
-    @comment = Comment.new(wtb_id: @wtb.id)
+    @commentable = @wtb
+    @comments = @commentable.comments
+    @comment = Comment.new
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @wtb }
     end
+  end
+  
+  def destroy
+    @wtb = Wtb.find(params[:id])
+    @wtb.destroy
+    redirect_to user_path(@wtb.user), notice: "Your WTB is deleted."
   end
 end

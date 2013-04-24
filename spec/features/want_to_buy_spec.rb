@@ -22,7 +22,7 @@ feature "[Want to buy]" do
     current_path.should == "/wtb/#{Wtb.last.slug}/wtb_steps/images"
     path = File.join("#{::Rails.root}/app/assets/images", "rails.png")
     attach_file("Images", path)
-    page.should have_content("You can upload multiple images.")
+    #page.should have_content("You can upload multiple images.")
     click_on "Finish"
 
     page.should have_content("Images for your WTB is updated")
@@ -54,7 +54,7 @@ feature "[Want to buy]" do
     current_path.should == "/wtb/#{Wtb.last.slug}/wtb_steps/images"
     path = File.join("#{::Rails.root}/app/assets/images", "rails.png")
     attach_file("Images", path)
-    page.should have_content("You can upload multiple images.")
+    #page.should have_content("You can upload multiple images.")
     click_on "Finish"
 
     page.should have_content("Images for your WTB is updated")

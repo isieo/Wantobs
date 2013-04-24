@@ -1,23 +1,23 @@
 class CommentsController < ApplicationController
+  before_filter :load_commentable
+  
   def index
-    @comments = Comment.all
+    @comments = @commentable.comments
   end
   
   def new
-    @comment = Comment.new
+    @comment = @commentable.comments.new
   end
 
   def create
-    @comment = Comment.new(params[:comment])
-    
+    @comment = @commentable.comments.new(params[:comment])
+    @comment.user_id = current_user.id
     if @comment.save
       UserMailer.comment_notification(@comment).deliver
-      flash[:notice] = "Comment successfully created"
-      redirect_to :back
+      redirect_to @commentable, notice: "Comment created."
     else
       flash[:notice] = "There is an error posting your comment, please try again later"
     end
-
   end
   
   def edit
@@ -47,5 +47,12 @@ class CommentsController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @comment }
     end
+  end
+  
+  private
+
+  def load_commentable
+    resource, id = request.path.split('/')[1, 2]
+    @commentable = resource.singularize.classify.constantize.find(id)
   end
 end

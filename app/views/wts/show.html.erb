@@ -29,7 +29,8 @@
   </div>
   <div class="large-4 columns">
     <% if @wts.user == current_user%>
-      <p><%= link_to 'Edit', edit_wts_path(@wts), class: 'button alert small' %></p>
+      <p><%= link_to 'Edit', edit_wts_path(@wts), class: 'button secondary small' %>
+      <%= link_to 'Destroy', @wts, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button alert small' %></p>
     <% else %>
       <p><%= link_to 'Contact Seller', user_path(@wts.user), class: 'button small' %></p>
     <% end %>
@@ -51,48 +52,46 @@
   <h2>Images</h2>
   <div class="large-12 columns">
     <ul class="clearing-thumbs inline-list" data-clearing>
-      <% @wts.wts_images.each do |img|%>
-        <li><%= link_to image_tag(img.image_url(:thumb).to_s, :class => 'th'), image_path(img.image_url.to_s) %></li>
+      <% if !@wts.wts_images.blank? %>
+        <% @wts.wts_images.each do |img|%>
+          <li><%= link_to image_tag(img.image_url(:thumb).to_s, :class => 'th'), image_path(img.image_url.to_s) %></li>
+        <% end %>
+      <% else %>
+        <li><%= image_tag("not_available.jpg", size: '200x200', class: 'th')%></li>
       <% end %>
     </ul>
   </div>
 </div>
 
-<div class="row">
-  <div class="large-8 columns">
-    <h6>Comments</h6>
-    <dl>
-      <% @comments.each do |comment| %>
+<h6>Comments</h6>
+<dl>
+  <% @comments.each do |comment| %>
+    <div class="row">
+      <div class="large-2 columns">
+        <%= link_to image_tag(comment.user.image_url(:comment_profile).to_s, :class => "th"), user_path(comment.commentable) %>
+      </div>
+      <div class="large-10 columns">
         <div class="panel">
           <dt class='poster-info'>
-            <%= link_to comment.user.username, user_path(comment.user) %> on 
+            <%= link_to comment.user.username, user_path(comment.commentable) %> on 
             <%= comment.created_at.to_formatted_s(:long) %> at 
-            <%=comment.created_at.strftime("%H:%M")%> said:
+            <%= comment.created_at.strftime("%H:%M")%> said:
             <%= '<span class="label">WTS Poster</span>'.html_safe if comment.user == @wts.user %>
           </dt>
-          <dd><%= comment.comment %></dd>
+          <dd><%= comment.content %></dd>
         </div>
-      <% end %>
-    </dl>
-    <div class="large-6 columns">
-      <%= form_for(@comment) do |f| %>
-        <% if @wts.errors.any? %>
-            <h2><%= pluralize(@wts.errors.count, "error") %> prohibited this product from being saved:</h2>
-            <ul>
-              <% @wts.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-              <% end %>
-            </ul>
-        <% end %>
-        <%= f.hidden_field :user_id, value: current_user.id %>
-        <%= f.hidden_field :wts_id %>
-        <%= f.text_area :comment, :size => "20x20"%>
-        <div align='right'>
-          <%= f.submit "Post", :class => "small button success radius" %>
-        </div>
-      <% end if user_signed_in? %>
+      </div>
     </div>
+  <% end %>
+</dl>
 
+<div class="row">
+  <div class="large-6 columns">
+    <%= form_for [@commentable, @comment] do |f| %>
+      <%= f.text_area :content, rows: 8 %>
+      <div align='right'>
+        <%= f.submit "Post", :class => "small button success radius" %>
+      </div>
+    <% end if user_signed_in? %>
   </div>
 </div>
-

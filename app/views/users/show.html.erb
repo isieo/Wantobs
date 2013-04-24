@@ -1,3 +1,6 @@
+<% content_for :facebook_meta_tag do%>
+  <meta property="og:image"            content="<%= @user.image_url.to_s %>">
+<% end if !@user.image.blank?%>
 <div class="row panel">
   <div class="large-2 columns">
     <%= image_tag @user.image_url(:thumb).to_s, :class => "th" %>
@@ -20,7 +23,14 @@
 <div class="row">
   <div class="large-6 columns">
     <div class="panel">
-      <h3><strong class='result-wts'>WTS</strong></h3>
+      <div class="row">
+        <div class="small-3 columns">
+          <h3><strong class='result-wts'>WTS</strong></h3>
+        </div>
+        <div class="small-9 columns">
+          <%= link_to "New WTS", new_wts_path, class: "button small"%>
+        </div>
+      </div>
       <table>
         <thead>
           <tr>
@@ -34,6 +44,8 @@
               <th rowspan="2">
                 <% if !result.wts_images.blank?%>
                   <%= link_to image_tag(result.wts_images.all.first.image_url(:list_size).to_s), wts_path(result), :class => "th" %>
+                <% else %>
+                  <%= link_to image_tag("not_available.jpg", size: "60x60"), wtb_path(result), :class => "th" %>
                 <% end %>
               </th>
               <td>
@@ -52,7 +64,14 @@
   </div>
   <div class="large-6 columns">
     <div class="panel">
-      <h3><strong class='result-wtb'>WTB</strong></h3>
+      <div class="row">
+        <div class="small-3 columns">
+          <h3><strong class='result-wtb'>WTB</strong></h3>
+        </div>
+        <div class="small-9 columns">
+          <%= link_to "New WTB", new_wtb_path, class: "button small"%>
+        </div>
+      </div>
       <table>
         <thead>
           <tr>
@@ -66,6 +85,8 @@
               <th rowspan="2">
                 <% if !result.wtb_images.blank?%>
                   <%= link_to image_tag(result.wtb_images.all.first.image_url(:list_size).to_s), wtb_path(result), :class => "th" %>
+                <% else %>
+                  <%= link_to image_tag("not_available.jpg", size: "60x60"), wtb_path(result), :class => "th" %>
                 <% end %>
               </th>
               <td>
@@ -81,5 +102,37 @@
         </tbody>
       </table>
     </div>
+  </div>
+</div>
+
+<h6>Comments</h6>
+<dl>
+  <% @comments.each do |comment| %>
+    <div class="row">
+      <div class="large-2 columns">
+        <%= link_to image_tag(comment.user.image_url(:comment_profile).to_s, :class => "th"), user_path(comment.commentable) %>
+      </div>
+      <div class="large-10 columns">
+        <div class="panel">
+          <dt class='poster-info'>
+            <%= link_to comment.user.username, user_path(comment.commentable) %> on 
+            <%= comment.created_at.to_formatted_s(:long) %> at 
+            <%= comment.created_at.strftime("%H:%M")%> said:
+          </dt>
+          <dd><%= comment.content %></dd>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</dl>
+
+<div class="row">
+  <div class="large-6 columns">
+    <%= form_for [@commentable, @comment] do |f| %>
+      <%= f.text_area :content, rows: 8 %>
+      <div align='right'>
+        <%= f.submit "Post", :class => "small button success radius" %>
+      </div>
+    <% end if user_signed_in? %>
   </div>
 </div>

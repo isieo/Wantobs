@@ -1,0 +1,25 @@
+<div class="row image-set">
+  <div class="large-6 columns">
+  
+    <div class="row ">
+      <div class="large-3 small-3 columns">
+        <% if !f.object.image_url.blank? %>
+          <%= image_tag(f.object.image_url(:thumb).to_s, :class => 'th')%>
+        <% else %>
+          <%= image_tag('new_image.jpg', :class => 'th') %>
+        <% end %>
+      </div>
+      
+      <div class="large-3 small-3 columns">
+        <%= f.label :image, "Images", class: "right inline"  %>
+      </div>
+      
+      <div class="large-6 small-6 columns">
+        <%= f.file_field :image %>
+        <%= f.hidden_field :_destroy %>
+        <%= link_to "remove", '#', class: "remove_fields" %>
+      </div>
+    </div>
+  </div>
+</div>
+

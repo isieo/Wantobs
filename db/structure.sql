@@ -471,12 +471,12 @@ SET default_with_oids = false;
 
 CREATE TABLE comments (
     id integer NOT NULL,
-    user_id integer,
-    wts_id integer,
-    wtb_id integer,
-    comment text,
+    content text,
+    commentable_id integer,
+    commentable_type character varying(255),
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    user_id integer
 );
 
 
@@ -527,7 +527,8 @@ CREATE TABLE users (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     username character varying(255),
-    image character varying(255)
+    image character varying(255),
+    commented_to_me_id integer
 );
 
 
@@ -784,6 +785,13 @@ ALTER TABLE ONLY wts
 
 
 --
+-- Name: index_comments_on_commentable_id_and_commentable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_commentable_id_and_commentable_type ON comments USING btree (commentable_id, commentable_type);
+
+
+--
 -- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -862,3 +870,15 @@ INSERT INTO schema_migrations (version) VALUES ('20130404074415');
 INSERT INTO schema_migrations (version) VALUES ('20130405082111');
 
 INSERT INTO schema_migrations (version) VALUES ('20130419080850');
+
+INSERT INTO schema_migrations (version) VALUES ('20130423042600');
+
+INSERT INTO schema_migrations (version) VALUES ('20130423042748');
+
+INSERT INTO schema_migrations (version) VALUES ('20130423080417');
+
+INSERT INTO schema_migrations (version) VALUES ('20130423080732');
+
+INSERT INTO schema_migrations (version) VALUES ('20130423082432');
+
+INSERT INTO schema_migrations (version) VALUES ('20130424061841');
