@@ -31,10 +31,11 @@ class WtsController < ApplicationController
 
     @wts.update_attributes(params[:wts])
     
-    if @wts.save
+    if @wts.user == current_user
+      @wts.save
       redirect_to wts_wts_steps_path(@wts.slug, :id => "images")
     else
-      render action: "new"
+      redirect_to root_path, notice: "You do not have permission to do this."
     end
 
   end
@@ -53,7 +54,11 @@ class WtsController < ApplicationController
   
   def destroy
     @wts = Wts.find(params[:id])
-    @wts.destroy
-    redirect_to user_path(@wts.user), notice: "Your WTS is deleted."
+    if @wts.user == current_user
+      @wts.destroy
+      redirect_to user_path(@wts.user), notice: "Your WTS is deleted."
+    else
+      redirect_to root_path, notice: "You do not have permission to do this."
+    end
   end
 end

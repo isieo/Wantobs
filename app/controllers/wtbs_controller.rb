@@ -31,10 +31,11 @@ class WtbsController < ApplicationController
 
     @wtb.update_attributes(params[:wtb])
 
-    if @wtb.save
+    if @wtb.user == current_user
+      @wtb.save
       redirect_to wtb_wtb_steps_path(@wtb.slug, :id => "images")
     else
-      render action: "new"
+      redirect_to root_path, notice: "You do not have permission to do this."
     end
 
   end
@@ -53,7 +54,11 @@ class WtbsController < ApplicationController
   
   def destroy
     @wtb = Wtb.find(params[:id])
-    @wtb.destroy
-    redirect_to user_path(@wtb.user), notice: "Your WTB is deleted."
+    if @wtb.user == current_user
+      @wtb.destroy
+      redirect_to user_path(@wtb.user), notice: "Your WTB is deleted."
+    else
+      redirect_to root_path, notice: "You do not have permission to do this."
+    end
   end
 end
