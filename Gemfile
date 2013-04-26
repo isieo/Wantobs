@@ -36,6 +36,7 @@ group :test do
 end
 
 gem "devise"
+gem 'omniauth-facebook'
 
 gem 'activerecord-postgres-hstore'
 gem 'zurb-foundation', '~> 4.0.0'

@@ -528,7 +528,9 @@ CREATE TABLE users (
     updated_at timestamp without time zone NOT NULL,
     username character varying(255),
     image character varying(255),
-    commented_to_me_id integer
+    commented_to_me_id integer,
+    provider character varying(255),
+    uid character varying(255)
 );
 
 
@@ -882,3 +884,5 @@ INSERT INTO schema_migrations (version) VALUES ('20130423080732');
 INSERT INTO schema_migrations (version) VALUES ('20130423082432');
 
 INSERT INTO schema_migrations (version) VALUES ('20130424061841');
+
+INSERT INTO schema_migrations (version) VALUES ('20130426182649');

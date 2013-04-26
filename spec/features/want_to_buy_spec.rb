@@ -108,7 +108,8 @@ feature "[Want to buy]" do
     visit "/"
     #select "WTB", from: "search_for"
     fill_in "search", with: "Keyboard"
-    click_on "Search"
+    #click_on "Search"
+    first(:button, "Search").click
     page.should have_content("Results for: Keyboard")
     page.should have_content("Logitech")
   end

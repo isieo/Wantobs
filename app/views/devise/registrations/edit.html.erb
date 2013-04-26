@@ -31,43 +31,36 @@
         </div>
       </div>
       
-      <div class="row ">
-        <div class="large-3 small-3 columns">
-          <%= f.label :password, class: "right inline" %>
+      <% if f.object.encrypted_password.present? %>
+        <div class="row ">
+          <div class="large-3 small-3 columns">
+            <%= f.label :password, class: "right inline", hint: "leave blank if you don't want to change it" %>
+          </div>
+          <div class="large-9 small-9 columns">
+            <%= f.password_field :password, :autocomplete => "off" %>
+            <h5 class="subheader">leave blank if you don't want to change it</h5>
+          </div>
         </div>
-        <div class="large-9 small-9 columns">
-          <%= f.password_field :password %>
-        </div>
-      </div>
-      
-      <div class="row ">
-        <div class="large-3 small-3 columns">
-          <%= f.label :password, class: "right inline", hint: "leave blank if you don't want to change it" %>
-        </div>
-        <div class="large-9 small-9 columns">
-          <%= f.password_field :password, :autocomplete => "off" %>
-          <h5 class="subheader">leave blank if you don't want to change it</h5>
-        </div>
-      </div>
 
-      <div class="row ">
-        <div class="large-3 small-3 columns">
-          <%= f.label :password_confirmation, class: "right inline" %>
+        <div class="row ">
+          <div class="large-3 small-3 columns">
+            <%= f.label :password_confirmation, class: "right inline" %>
+          </div>
+          <div class="large-9 small-9 columns">
+            <%= f.password_field :password_confirmation %>
+          </div>
         </div>
-        <div class="large-9 small-9 columns">
-          <%= f.password_field :password_confirmation %>
+        
+        <div class="row ">
+          <div class="large-3 small-3 columns">
+            <%= f.label :current_password, class: "right inline", hint: "we need your current password to confirm your changes" %>
+          </div>
+          <div class="large-9 small-9 columns">
+            <%= f.password_field :current_password %>
+            <h5 class="subheader">we need your current password to confirm your changes</h5>
+          </div>
         </div>
-      </div>
-      
-      <div class="row ">
-        <div class="large-3 small-3 columns">
-          <%= f.label :current_password, class: "right inline", hint: "we need your current password to confirm your changes" %>
-        </div>
-        <div class="large-9 small-9 columns">
-          <%= f.password_field :current_password %>
-          <h5 class="subheader">we need your current password to confirm your changes</h5>
-        </div>
-      </div>
+      <% end %>
       
       <div class="row ">
         <div class="large-3 small-3 columns">

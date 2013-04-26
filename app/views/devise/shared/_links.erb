@@ -20,6 +20,7 @@
 
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider), class: "button small" %><br />
+    <%#= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider), class: "button small" %>
+    <%= link_to image_tag('facebook_sign_in.png', size: '250x150'), omniauth_authorize_path(resource_name, provider), class: "th" %>
   <% end -%>
 <% end -%>

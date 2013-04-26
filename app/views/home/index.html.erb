@@ -1,6 +1,19 @@
 <div class="row">
   <div class="large-12 columns">
     <%= image_tag('logo.png', class: "th")%>
+    <%= form_tag search_path, :method => 'get', :class =>"custom" do %>
+      <div class="row collapse">
+        <div class="small-8 columns">
+          <%= text_field_tag :adv_search, params[:adv_search] %>
+        </div>
+        <div class="small-2 columns ">
+          <%= select_tag :search_for, options_for_select(["WTS", "WTB"])%>   
+        </div>
+        <div class="small-2 columns">
+          <%= submit_tag "Search", :name => nil, :class => "button postfix" %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
 

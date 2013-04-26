@@ -31,24 +31,26 @@
           <%= f.email_field :email %>
         </div>
       </div>
+      
+      <% if f.object.password_required? %>
+        <div class="row ">
+          <div class="large-3 small-3 columns">
+            <%= f.label :password, class: "right inline" %>
+          </div>
+          <div class="large-9 small-9 columns">
+            <%= f.password_field :password %>
+          </div>
+        </div>
 
-      <div class="row ">
-        <div class="large-3 small-3 columns">
-          <%= f.label :password, class: "right inline" %>
+        <div class="row ">
+          <div class="large-3 small-3 columns">
+            <%= f.label :password_confirmation, class: "right inline" %>
+          </div>
+          <div class="large-9 small-9 columns">
+            <%= f.password_field :password_confirmation %>
+          </div>
         </div>
-        <div class="large-9 small-9 columns">
-          <%= f.password_field :password %>
-        </div>
-      </div>
-
-      <div class="row ">
-        <div class="large-3 small-3 columns">
-          <%= f.label :password_confirmation, class: "right inline" %>
-        </div>
-        <div class="large-9 small-9 columns">
-          <%= f.password_field :password_confirmation %>
-        </div>
-      </div>
+      <% end %>
       
       <div class="row ">
         <div class="large-4 small-4 large-offset-4 columns">

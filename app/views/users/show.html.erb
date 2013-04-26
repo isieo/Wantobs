@@ -3,7 +3,8 @@
 <% end if !@user.image.blank?%>
 <div class="row panel">
   <div class="large-2 columns">
-    <%= image_tag @user.image_url(:thumb).to_s, :class => "th" %>
+    <%= image_tag @user.image_url(:thumb).to_s, :class => "th large-offset-2" %>
+    <%= link_to "Update details", edit_user_registration_path(current_user), class: 'button small ' if @user == current_user%>
   </div>
   <div class="large-10 columns">
     <table class="large-12 columns borderless_table">
