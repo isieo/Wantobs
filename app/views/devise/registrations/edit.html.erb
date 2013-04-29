@@ -75,8 +75,9 @@
       </div>
       
       <div class="row ">
-        <div class="large-4 small-4 large-offset-4 columns">
+        <div class="large-8 small-8 large-offset-4 columns">
           <%= f.submit "Update", class: "button small"%>
+          <%= link_to "Back", :back, class: "button small secondary" %>
         </div>
       </div>
       
@@ -86,8 +87,8 @@
 
 <div class="row ">
   <div class="large-4 small-4 left">
-    <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, class: "button small alert" %>
-    <%= link_to "Back", :back, class: "button small secondary" %>
+    <%#= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, class: "button small alert" %>
+    <%#= link_to "Back", :back, class: "button small secondary" %>
   </div>
 </div>
 

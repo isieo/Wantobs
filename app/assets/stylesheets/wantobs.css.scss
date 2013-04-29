@@ -8,6 +8,9 @@ table.borderless_table{
 strong.result-wts{
   color: red;
 }
+strong.result-wtb{
+  color: blue;
+}
 textarea{
   min-height: 75px;
 }
@@ -22,4 +25,10 @@ h2.title{
 h3.title{
   color: #1111FF;
   margin-bottom: 1px;
+}
+span.result-link{
+  font-size: 1.5em;
+}
+td div.result-budget{
+  text-align: center;
 }

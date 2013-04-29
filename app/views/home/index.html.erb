@@ -1,10 +1,13 @@
+
 <div class="row">
-  <div class="large-12 columns">
+  <div class="large-12 columns" style="text-align: center;">
     <%= image_tag('logo.png', class: "th")%>
+  </div>
+  <div class="large-12 columns">
     <%= form_tag search_path, :method => 'get', :class =>"custom" do %>
       <div class="row collapse">
         <div class="small-8 columns">
-          <%= text_field_tag :adv_search, params[:adv_search] %>
+          <%= text_field_tag :adv_search, params[:adv_search], placeholder: "Search for an item..." %>
         </div>
         <div class="small-2 columns ">
           <%= select_tag :search_for, options_for_select(["WTS", "WTB"])%>   
@@ -40,7 +43,7 @@
             </th>
             <td>
               <%= link_to wts_path(result) do%> 
-                <strong class="result-wts">[WTS]</strong> <%=result.item%>
+                <strong class="result-wts">[WTS]</strong> <span class="result-link"><%=result.item%></span>
               <% end %>
             </td>
           </tr>
@@ -73,7 +76,7 @@
             </th>
             <td>
               <%= link_to wts_path(result) do%> 
-                <strong class="result-wtb">[WTB]</strong> <%=result.item%>
+                <strong class="result-wtb">[WTB]</strong> <span class="result-link"><%=result.item%></span>
               <% end %>
             </td>
           </tr>
