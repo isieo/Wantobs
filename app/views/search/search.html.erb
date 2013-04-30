@@ -18,6 +18,7 @@
       <tr>
         <th>Thumbnail</th>
         <th width="300">Item</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -39,10 +40,16 @@
               <strong class="result-<%= result.class.to_s.downcase %>">[<%= result.class.to_s.upcase %>]</strong> <%=result.item%>
             <% end %>
           </td>
+          <td>
+            <div class="result-budget">
+              <%= result.budget %>
+            </div>
+          </td>
         </tr>
         <tr>
-          <td class = 'subheader'><%= result.additional_info.truncate(20) if !result.additional_info.nil? %></td>
-        </tr>
+        <td class = 'subheader'><%= result.additional_info.truncate(20) if !result.additional_info.nil? %></td>
+        <td><%= link_to "Contact Seller", user_path(result.user), class: "button small"%></td>
+      </tr>
       <% end %>
     </tbody>
   </table>

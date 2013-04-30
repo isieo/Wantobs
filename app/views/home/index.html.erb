@@ -1,7 +1,9 @@
-
+<% content_for :facebook_meta_tag do%>
+  <meta property="og:image"            content="<%= asset_path("logo.png") %>">
+<% end %>
 <div class="row">
   <div class="large-12 columns" style="text-align: center;">
-    <%= image_tag('logo.png', class: "th")%>
+    <%= image_tag('logo.png')%>
   </div>
   <div class="large-12 columns">
     <%= form_tag search_path, :method => 'get', :class =>"custom" do %>

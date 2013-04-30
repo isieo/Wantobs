@@ -41,7 +41,7 @@ class WtbImageUploader < CarrierWave::Uploader::Base
     process :resize_to_limit => [200, 200]
   end
   version :list_size do
-    process :resize_to_limit => [60, 60]
+    process :resize_to_limit => [120, 120]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

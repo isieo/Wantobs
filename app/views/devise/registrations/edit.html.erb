@@ -63,13 +63,13 @@
       <% end %>
       
       <div class="row ">
-        <div class="large-3 small-3 columns">
-          <%= f.label :image, class: "right inline"%>
+        <div class="small-3 columns">
+          <%= f.label :image, class: "right inline" do%>
+            Image
+            <%= image_tag @user.image_url(:list_size).to_s, :class => "th" %>
+          <% end %>
         </div>
-        <div class="large-4 small-4 columns">
-          <%= image_tag @user.image_url(:list_size).to_s, :class => "th" %>
-        </div>
-        <div class="large-8 small-8 columns">
+        <div class="small-9 columns">
           <%= f.file_field :image %>
         </div>
       </div>
